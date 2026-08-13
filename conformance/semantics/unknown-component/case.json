@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-COMPONENT",
+  "phase": "semantics",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E011", "line": 3, "column": 5 }]
+  }
+}

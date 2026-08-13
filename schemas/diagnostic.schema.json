@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/raw/main/schemas/diagnostic.schema.json",
+  "title": "MedUI diagnostic envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tool", "findings"],
+  "properties": {
+    "tool": { "type": "string", "minLength": 1 },
+    "filesChecked": { "type": "integer", "minimum": 0 },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "line", "column", "code", "severity", "message", "fixHint"],
+        "properties": {
+          "file": { "type": "string", "minLength": 1 },
+          "line": { "type": "integer", "minimum": 0 },
+          "column": { "type": "integer", "minimum": 0 },
+          "code": { "type": "string", "pattern": "^MEDUI-E[0-9]{3}$" },
+          "severity": { "type": "string", "enum": ["error", "warning", "note"] },
+          "message": { "type": "string", "minLength": 1 },
+          "fixHint": { "type": "string" }
+        }
+      }
+    }
+  }
+}

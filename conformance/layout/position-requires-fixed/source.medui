@@ -1,0 +1,11 @@
+Screen Positioned {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: Fill;
+        height: 40px;
+        position: 0px, 0px;
+        text: t("STR-TITLE");
+        color: Theme.Colors.Title;
+    }
+}

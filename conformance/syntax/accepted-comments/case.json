@@ -1,0 +1,6 @@
+{
+  "id": "MEDUI-CASE-SYNTAX-COMMENTS",
+  "phase": "syntax",
+  "source": "source.medui",
+  "expected": { "valid": true, "diagnostics": [] }
+}

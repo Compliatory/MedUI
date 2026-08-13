@@ -1,0 +1,11 @@
+// portable comment
+Screen Portable {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: 200px;
+        height: 40px;
+        text: t("STR-TITLE");
+        color: Theme.Colors.Title;
+    }
+}

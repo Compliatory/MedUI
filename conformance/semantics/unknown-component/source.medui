@@ -1,0 +1,8 @@
+Screen Unknown {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Mystery {
+        id: mystery;
+        width: 10px;
+        height: 10px;
+    }
+}

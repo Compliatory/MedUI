@@ -1,0 +1,13 @@
+{
+  "policy": "MduX accepts these aliases for one release; canonical output uses MEDUI-E codes.",
+  "aliases": {
+    "MDX-E000": "MEDUI-E000", "MDX-E001": "MEDUI-E001", "MDX-E002": "MEDUI-E002",
+    "MDX-E003": "MEDUI-E003", "MDX-E004": "MEDUI-E004", "MDX-E010": "MEDUI-E010",
+    "MDX-E011": "MEDUI-E011", "MDX-E012": "MEDUI-E012", "MDX-E013": "MEDUI-E013",
+    "MDX-E014": "MEDUI-E014", "MDX-E015": "MEDUI-E015", "MDX-E016": "MEDUI-E016",
+    "MDX-E017": "MEDUI-E017", "MDX-E030": "MEDUI-E030", "MDX-E031": "MEDUI-E031",
+    "MDX-E032": "MEDUI-E032", "MDX-E050": "MEDUI-E050", "MDX-E051": "MEDUI-E051",
+    "MDX-E052": "MEDUI-E052", "MDX-E053": "MEDUI-E053", "MDX-E070": "MEDUI-E070",
+    "MDX-E071": "MEDUI-E071"
+  }
+}

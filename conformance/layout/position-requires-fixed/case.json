@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-LAYOUT-POSITION-FIXED",
+  "phase": "layout",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E051", "line": 7, "column": 9 }]
+  }
+}

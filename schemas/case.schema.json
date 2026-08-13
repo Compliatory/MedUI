@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/raw/main/schemas/case.schema.json",
+  "title": "MedUI conformance case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "phase", "source", "expected"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^MEDUI-CASE-[A-Z0-9-]+$" },
+    "phase": { "enum": ["syntax", "semantics", "layout", "safety", "support"] },
+    "source": { "type": "string", "pattern": "^[^/]+\\.medui$" },
+    "inputs": { "type": "object" },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid", "diagnostics"],
+      "properties": {
+        "valid": { "type": "boolean" },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "line", "column"],
+            "properties": {
+              "code": { "type": "string", "pattern": "^MEDUI-E[0-9]{3}$" },
+              "line": { "type": "integer", "minimum": 0 },
+              "column": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "observations": { "type": "object" }
+      }
+    }
+  }
+}

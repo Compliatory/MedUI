@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-SAFETY-MISSING-REQUIREMENT",
+  "phase": "safety",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E070", "line": 3, "column": 5 }]
+  }
+}

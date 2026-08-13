@@ -1,0 +1,11 @@
+Screen Nested {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Row {
+        id: outer;
+        height: 80px;
+        Row {
+            id: inner;
+            height: 40px;
+        }
+    }
+}
