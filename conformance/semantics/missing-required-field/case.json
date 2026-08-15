@@ -1,0 +1,12 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-MISSING-REQUIRED-FIELD",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "textPackages": [{ "locale": "en-US", "keys": ["STR-TITLE"] }]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E012", "line": 3, "column": 5 }]
+  }
+}

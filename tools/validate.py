@@ -74,6 +74,29 @@ def main() -> None:
         source = path.parent / case["source"]
         if not source.is_file() or source.suffix != ".medui":
             fail(f"{case['id']} source does not resolve")
+        inputs = case.get("inputs", {})
+        if not isinstance(inputs, dict) or set(inputs) - {"themeTokens", "textPackages"}:
+            fail(f"{case['id']} has invalid semantic inputs")
+        theme_tokens = inputs.get("themeTokens", [])
+        if (not isinstance(theme_tokens, list)
+                or any(not isinstance(token, str) or not token for token in theme_tokens)
+                or len(theme_tokens) != len(set(theme_tokens))):
+            fail(f"{case['id']} has invalid or duplicate theme tokens")
+        text_packages = inputs.get("textPackages", [])
+        if not isinstance(text_packages, list):
+            fail(f"{case['id']} has invalid text packages")
+        locales = set()
+        for package in text_packages:
+            if not isinstance(package, dict) or set(package) != {"locale", "keys"}:
+                fail(f"{case['id']} has an invalid text package")
+            locale = package["locale"]
+            keys = package["keys"]
+            if (not isinstance(locale, str) or not locale or locale in locales
+                    or not isinstance(keys, list)
+                    or any(not isinstance(key, str) or not key for key in keys)
+                    or len(keys) != len(set(keys))):
+                fail(f"{case['id']} has an invalid or duplicate locale/key")
+            locales.add(locale)
         expected = case["expected"]
         if set(expected) - {"valid", "diagnostics", "observations"}:
             fail(f"{case['id']} has invalid expected members")

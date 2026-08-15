@@ -1,0 +1,11 @@
+Screen UnknownField {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: 120px;
+        height: 24px;
+        text: t("STR-TITLE");
+        colour: Theme.Colors.Title;
+        color: Theme.Colors.Title;
+    }
+}

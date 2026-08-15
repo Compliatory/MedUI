@@ -9,7 +9,33 @@
     "id": { "type": "string", "pattern": "^MEDUI-CASE-[A-Z0-9-]+$" },
     "phase": { "enum": ["syntax", "semantics", "layout", "safety", "support"] },
     "source": { "type": "string", "pattern": "^[^/]+\\.medui$" },
-    "inputs": { "type": "object" },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "themeTokens": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "textPackages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["locale", "keys"],
+            "properties": {
+              "locale": { "type": "string", "minLength": 1 },
+              "keys": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
     "expected": {
       "type": "object",
       "additionalProperties": false,

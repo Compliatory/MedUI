@@ -14,3 +14,9 @@ claimed phase is checked at that precision: a case's position is matched as far 
 goes, and a diagnostic carrying more position than declared is a failure. The declaration is
 checked rather than tolerated, so gaining precision is a manifest change and never a silent one.
 A phase claimed at reduced precision is still claimed.
+
+Semantic cases may provide implementation-neutral `inputs`: `themeTokens` is the complete set of
+known colour-token names, and each `textPackages` entry is the complete key view for one approved
+locale. An omitted collection is empty. Tokens, locale names, and keys are non-empty and unique;
+locale order has no semantic meaning. These logical views deliberately do not prescribe an
+implementation's package, file, or runtime representation.
