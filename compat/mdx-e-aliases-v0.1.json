@@ -1,5 +1,5 @@
 {
-  "policy": "MduX accepts these aliases for one release; canonical output uses MEDUI-E codes.",
+  "policy": "Historical map for consumers still matching MduX's pre-contract MDX-E### output. Canonical output is MEDUI-E###; the numbers are unchanged, so only the namespace differs. MduX exposes the mapping as legacyId() and does not accept legacy identifiers as input.",
   "aliases": {
     "MDX-E000": "MEDUI-E000", "MDX-E001": "MEDUI-E001", "MDX-E002": "MEDUI-E002",
     "MDX-E003": "MEDUI-E003", "MDX-E004": "MEDUI-E004", "MDX-E010": "MEDUI-E010",

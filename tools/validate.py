@@ -10,6 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PHASES = {"syntax", "semantics", "layout", "safety", "support"}
+CAPABILITIES = ["syntax", "semantics", "layout", "safety"]
+PRECISIONS = ["full", "line-only", "none"]
 CASE_ID = re.compile(r"MEDUI-CASE-[A-Z0-9-]+\Z")
 CODE = re.compile(r"MEDUI-E[0-9]{3}\Z")
 
@@ -33,6 +35,20 @@ def main() -> None:
     known_codes = set(re.findall(r"`(MEDUI-E[0-9]{3})`", (ROOT / "spec/diagnostics.md").read_text()))
     if len(known_codes) != 22:
         fail(f"expected 22 registered diagnostics, found {len(known_codes)}")
+
+    # The consumer-manifest schema and governance/versioning.md state the same constraints; a
+    # harness reads one and a maintainer reads the other, so they are checked against each other
+    # rather than trusted to stay in step.
+    manifest_schema = json.loads((ROOT / "schemas/consumer-manifest.schema.json").read_text())
+    if set(manifest_schema["required"]) != {"repository", "commit", "capabilities", "positions"}:
+        fail(f"consumer manifest required keys changed: {manifest_schema['required']}")
+    if manifest_schema["additionalProperties"] is not False:
+        fail("the consumer manifest must reject unknown keys")
+    properties = manifest_schema["properties"]
+    if properties["positions"]["enum"] != PRECISIONS:
+        fail(f"declared precisions changed: {properties['positions']['enum']}")
+    if properties["capabilities"]["items"]["enum"] != CAPABILITIES:
+        fail(f"capabilities changed: {properties['capabilities']['items']['enum']}")
 
     aliases = json.loads((ROOT / "compat/mdx-e-aliases-v0.1.json").read_text())["aliases"]
     if set(aliases.values()) != known_codes:

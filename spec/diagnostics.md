@@ -4,6 +4,27 @@ The canonical finding envelope is defined by `schemas/diagnostic.schema.json`. P
 1-based; `0` means unknown. Columns count UTF-8 bytes. Messages and fix hints may be reworded, but a
 code's meaning, severity, and phase are stable.
 
+## Positions in conformance cases
+
+A case always pins a full position — both `line` and `column` — and those pinned values are the
+same for every consumer. A case is never rewritten, zeroed, or otherwise adjusted to suit an
+implementation. What varies is how much of that pinned position an implementation is required to
+reproduce, which it declares as `positions` in its manifest.
+
+The table below constrains the **reported** diagnostic, never the fixture:
+
+| `positions` | Implementation reports | Required reported position |
+|---|---|---|
+| `full` | line and column | `line` equals the pinned line, and `column` equals the pinned column |
+| `line-only` | line only | `line` equals the pinned line, and `column` is `0` |
+| `none` | neither | `line` is `0`, and `column` is `0` |
+
+Reporting `0` where a case pins a non-zero value satisfies the case only at the declared
+precision. Reporting a position the declaration says will not be reported is a failure, so an
+implementation cannot quietly gain precision without amending its manifest — and cannot quietly
+lose it either. An implementation reporting a *different* non-zero position from the one pinned
+fails at every precision.
+
 | Code | Phase | Meaning |
 |---|---|---|
 | `MEDUI-E000` | support | recipe unreadable |
