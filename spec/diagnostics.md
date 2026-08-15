@@ -6,15 +6,18 @@ code's meaning, severity, and phase are stable.
 
 ## Positions in conformance cases
 
-A case pins the position a fully position-reporting implementation must produce. A consumer
-declares its own precision as `positions` in its manifest, and a case is matched against that
-declaration:
+A case always pins a full position — both `line` and `column` — and those pinned values are the
+same for every consumer. A case is never rewritten, zeroed, or otherwise adjusted to suit an
+implementation. What varies is how much of that pinned position an implementation is required to
+reproduce, which it declares as `positions` in its manifest.
 
-| `positions` | Reports | A case's pinned position is |
+The table below constrains the **reported** diagnostic, never the fixture:
+
+| `positions` | Implementation reports | Required reported position |
 |---|---|---|
-| `full` | line and column | matched exactly |
-| `line-only` | line only | `line` matched exactly; `column` must be `0` |
-| `none` | neither | both must be `0` |
+| `full` | line and column | `line` equals the pinned line, and `column` equals the pinned column |
+| `line-only` | line only | `line` equals the pinned line, and `column` is `0` |
+| `none` | neither | `line` is `0`, and `column` is `0` |
 
 Reporting `0` where a case pins a non-zero value satisfies the case only at the declared
 precision. Reporting a position the declaration says will not be reported is a failure, so an

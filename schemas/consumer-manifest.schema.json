@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/raw/main/schemas/consumer-manifest.schema.json",
+  "title": "MedUI consumer manifest",
+  "description": "The parsed structure of a consumer's medui-conformance.toml. The file on disk is TOML; this describes what a harness sees after parsing it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["repository", "commit", "capabilities", "positions"],
+  "properties": {
+    "repository": {
+      "const": "https://github.com/Compliatory/MedUI",
+      "description": "The contract repository being pinned, not the consumer's own."
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Informational label for the pinned revision. Never consulted; `commit` identifies the contract."
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["syntax", "semantics", "layout", "safety"] }
+    },
+    "positions": { "enum": ["full", "line-only", "none"] }
+  }
+}
