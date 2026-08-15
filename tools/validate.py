@@ -33,8 +33,8 @@ def main() -> None:
         fail(f"decision identifiers are not the expected contiguous set: {decision_ids}")
 
     known_codes = set(re.findall(r"`(MEDUI-E[0-9]{3})`", (ROOT / "spec/diagnostics.md").read_text()))
-    if len(known_codes) != 22:
-        fail(f"expected 22 registered diagnostics, found {len(known_codes)}")
+    if len(known_codes) != 23:
+        fail(f"expected 23 registered diagnostics, found {len(known_codes)}")
 
     # The consumer-manifest schema and governance/versioning.md state the same constraints; a
     # harness reads one and a maintainer reads the other, so they are checked against each other
