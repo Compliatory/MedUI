@@ -43,6 +43,7 @@ fails at every precision.
 | `MEDUI-E030` | semantics | unknown color token |
 | `MEDUI-E031` | semantics | unknown text key |
 | `MEDUI-E032` | semantics | text key missing for an approved locale |
+| `MEDUI-E033` | semantics | field value has the wrong semantic kind |
 | `MEDUI-E050` | layout | text budget exceeded |
 | `MEDUI-E051` | layout | layout overflow |
 | `MEDUI-E052` | layout | surface exceeded |

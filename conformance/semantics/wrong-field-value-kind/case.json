@@ -1,0 +1,13 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-WRONG-FIELD-VALUE-KIND",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Title"],
+    "textPackages": [{ "locale": "en-US", "keys": ["STR-TITLE"] }]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E033", "line": 5, "column": 16 }]
+  }
+}
