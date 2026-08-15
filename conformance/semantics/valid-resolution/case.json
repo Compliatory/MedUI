@@ -1,0 +1,13 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-VALID-RESOLUTION",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Title"],
+    "textPackages": [
+      { "locale": "en-US", "keys": ["STR-TITLE"] },
+      { "locale": "fr-FR", "keys": ["STR-TITLE"] }
+    ]
+  },
+  "expected": { "valid": true, "diagnostics": [] }
+}

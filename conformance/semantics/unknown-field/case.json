@@ -1,0 +1,13 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-FIELD",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Title"],
+    "textPackages": [{ "locale": "en-US", "keys": ["STR-TITLE"] }]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E013", "line": 8, "column": 9 }]
+  }
+}

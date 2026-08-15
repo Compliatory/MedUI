@@ -1,0 +1,10 @@
+Screen HardcodedText {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: 120px;
+        height: 24px;
+        text: "Product Name";
+        color: Theme.Colors.Title;
+    }
+}

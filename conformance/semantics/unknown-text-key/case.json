@@ -1,0 +1,16 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-TEXT-KEY",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Title"],
+    "textPackages": [
+      { "locale": "en-US", "keys": [] },
+      { "locale": "fr-FR", "keys": [] }
+    ]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E031", "line": 7, "column": 15 }]
+  }
+}

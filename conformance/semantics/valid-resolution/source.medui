@@ -1,0 +1,10 @@
+Screen ValidResolution {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: 120px;
+        height: 24px;
+        text: t("STR-TITLE");
+        color: Theme.Colors.Title;
+    }
+}

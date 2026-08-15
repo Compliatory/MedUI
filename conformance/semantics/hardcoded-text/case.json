@@ -1,0 +1,10 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-HARDCODED-TEXT",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": { "themeTokens": ["Theme.Colors.Title"] },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E017", "line": 7, "column": 15 }]
+  }
+}
