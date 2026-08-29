@@ -1,0 +1,12 @@
+Screen UnknownSystemEvent {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    CriticalButton {
+        id: halt;
+        requirement: "REQ-HALT-001";
+        width: 120px;
+        height: 32px;
+        label: t("STR-HALT");
+        color: Theme.Colors.Title;
+        on_press: Stop;
+    }
+}

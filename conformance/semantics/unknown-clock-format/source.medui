@@ -1,0 +1,9 @@
+Screen UnknownClockFormat {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Clock {
+        id: elapsed;
+        width: 120px;
+        height: 24px;
+        format: HH_MM;
+    }
+}
