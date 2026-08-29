@@ -1,0 +1,10 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-CLOCK-FORMAT",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {},
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E034", "line": 7, "column": 17 }]
+  }
+}

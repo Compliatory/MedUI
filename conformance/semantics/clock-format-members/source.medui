@@ -1,0 +1,15 @@
+Screen ClockFormatMembers {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Clock {
+        id: elapsed;
+        width: 120px;
+        height: 24px;
+        format: TimeSeconds;
+    }
+    Clock {
+        id: stamp;
+        width: 240px;
+        height: 24px;
+        format: DateTimeSeconds;
+    }
+}

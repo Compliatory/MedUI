@@ -1,0 +1,13 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-SYSTEM-EVENT",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Title"],
+    "textPackages": [{ "locale": "en-US", "keys": ["STR-HALT"] }]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E034", "line": 10, "column": 19 }]
+  }
+}

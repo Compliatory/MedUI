@@ -1,0 +1,10 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-SYSTEM-EVENT-MEMBERS",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Title"],
+    "textPackages": [{ "locale": "en-US", "keys": ["STR-ACK", "STR-HALT"] }]
+  },
+  "expected": { "valid": true, "diagnostics": [] }
+}
