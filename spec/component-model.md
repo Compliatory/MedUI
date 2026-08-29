@@ -47,6 +47,12 @@ a member reports `MEDUI-E034`; a value of the wrong *kind* still reports `MEDUI-
 | `on_press` | `CriticalButton` | `NoOp` | no effect |
 | | | `TriggerHalt` | requests the host's halt path |
 
+Every member above is pinned by a positive conformance case as well as a negative one: a closed set
+whose members are all rejected would otherwise satisfy the rejection cases while implementing an
+empty vocabulary. The renderings are normative but not yet mechanically checkable — there is no
+text-budget case and no font model in this contract — so `clock-format-members` carries them as an
+`observations` entry, which records the fact without yet asserting it.
+
 Closing `format` is what makes a clock measurable. Because the rendering of each member is fixed
 here, a text-budget pass knows a `TimeSeconds` clock draws eight glyphs and can check them against
 the node's bounds. An open name can only be looked up in a table the product supplies, which moves a
@@ -56,17 +62,19 @@ Closing `on_press` is what keeps a critical control honest: a screen that can na
 can name one the host does not implement, and the press of a critical button is the worst place to
 discover it.
 
-`charset` stays open. It names a baked character set rather than a member of a fixed vocabulary, so
-it is resolved against the implementation's own packages; an unresolved one reports `MEDUI-E034` in
-the same way, since the failure is the same shape.
+`charset` stays open and is **not** covered by `MEDUI-E034`. It names a baked character set rather
+than a member of a fixed vocabulary, so what resolves it is the implementation's own packages rather
+than this contract. An unresolved `charset` fails compilation and has no code assigned; giving it
+one would require the case schema to carry charset-package inputs, so that a case could state which
+sets exist before asserting that one does not.
 
 Node IDs are unique after synthetic row-background nodes are included. `position` requires fixed
 dimensions and removes the node from flow. Positioned nodes must remain in their containing box and
 must not overlap other non-background nodes. Images render at intrinsic dimensions. Text keys must
 exist for every approved locale, and every static or bounded-dynamic text value must fit its box in
 the worst approved case. Unknown theme tokens (`MEDUI-E030`), text keys (`MEDUI-E031`), CV
-checks (`MEDUI-E071`), and named values outside their set (`MEDUI-E034`) fail compilation. Unknown
-image IDs and templates fail compilation and have no code assigned yet.
+checks (`MEDUI-E071`), and members outside a closed set (`MEDUI-E034`) fail compilation. Unknown
+image IDs, templates and charsets also fail compilation and have no code assigned yet.
 
 Compiled output is a flat, locale-free sequence of nodes with absolute rectangles and a finite
 draw budget. Implementation-specific output fields beyond these shared semantics are permitted.

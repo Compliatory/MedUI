@@ -1,6 +1,10 @@
 # MEDUI-DEC-006: Closed named values
 
-Status: Accepted
+Status: Proposed
+
+`governance/versioning.md` accepts a contract change only after every implementation claiming the
+affected capability passes the candidate commit. No implementation has yet, so this stays Proposed;
+it becomes Accepted when those results are attached.
 
 `format` and `on_press` are closed sets, enumerated in `spec/component-model.md`. `charset` stays an
 open name resolved against the implementation's baked character sets. A syntactically valid

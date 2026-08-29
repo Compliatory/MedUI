@@ -1,0 +1,16 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-CLOCK-FORMAT-MEMBERS",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {},
+  "expected": {
+    "valid": true,
+    "diagnostics": [],
+    "observations": {
+      "clockRenderings": {
+        "TimeSeconds": "HH:MM:SS",
+        "DateTimeSeconds": "YYYY-MM-DD HH:MM:SS"
+      }
+    }
+  }
+}
