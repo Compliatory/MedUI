@@ -14,6 +14,23 @@ CAPABILITIES = ["syntax", "semantics", "layout", "safety"]
 PRECISIONS = ["full", "line-only", "none"]
 CASE_ID = re.compile(r"MEDUI-CASE-[A-Z0-9-]+\Z")
 CODE = re.compile(r"MEDUI-E[0-9]{3}\Z")
+# VERSION is MAJOR.MINOR.PATCH only. Release-candidate and "-candidate" labels live in git tags and
+# the consumer manifest's `version` field, never in this file, so a pre-release suffix here is an
+# error rather than an accepted shape.
+VERSION_SHAPE = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+\Z")
+REGISTRY_ROW = re.compile(r"\|\s*`(MEDUI-E[0-9]{3})`\s*\|\s*([a-z]+)\s*\|")
+
+# Diagnostics registered as of the 0.1 baseline. MEDUI-DEC-005 fixes a code's meaning and forbids
+# reuse; this set is the concrete "nothing was dropped" tripwire. New codes are added to
+# spec/diagnostics.md and need no entry here.
+BASELINE_CODES = {
+    "MEDUI-E000", "MEDUI-E001", "MEDUI-E002", "MEDUI-E003", "MEDUI-E004",
+    "MEDUI-E010", "MEDUI-E011", "MEDUI-E012", "MEDUI-E013", "MEDUI-E014",
+    "MEDUI-E015", "MEDUI-E016", "MEDUI-E017",
+    "MEDUI-E030", "MEDUI-E031", "MEDUI-E032", "MEDUI-E033", "MEDUI-E034",
+    "MEDUI-E050", "MEDUI-E051", "MEDUI-E052", "MEDUI-E053",
+    "MEDUI-E070", "MEDUI-E071",
+}
 
 
 def fail(message: str) -> None:
@@ -21,25 +38,50 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
+def note(message: str) -> None:
+    print(f"MedUI validation: note: {message}")
+
+
+def load_json(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        fail(f"{path.relative_to(ROOT)} is not valid JSON: {error}")
+
+
+def is_int(value: object) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
 def main() -> None:
-    if (ROOT / "VERSION").read_text(encoding="utf-8").strip() != "0.1.0":
-        fail("VERSION must be 0.1.0 for the initial contract")
+    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    if not VERSION_SHAPE.fullmatch(version):
+        fail(f"VERSION must be MAJOR.MINOR.PATCH, got {version!r}")
 
-    decision_ids = []
-    for path in sorted((ROOT / "decisions").glob("MEDUI-DEC-*.md")):
-        decision_id = path.name.split("-", 3)[:3]
-        decision_ids.append("-".join(decision_id))
-    if decision_ids != [f"MEDUI-DEC-{number:03d}" for number in range(1, 7)]:
-        fail(f"decision identifiers are not the expected contiguous set: {decision_ids}")
+    # Decision identifiers are contiguous from 001. The count is free to grow; a gap or a
+    # renumber is not (MEDUI-DEC identities are permanent).
+    decision_numbers = sorted(
+        int(path.name.split("-")[2]) for path in (ROOT / "decisions").glob("MEDUI-DEC-*.md")
+    )
+    if decision_numbers != list(range(1, len(decision_numbers) + 1)):
+        fail(f"decision identifiers are not contiguous from 001: {decision_numbers}")
 
-    known_codes = set(re.findall(r"`(MEDUI-E[0-9]{3})`", (ROOT / "spec/diagnostics.md").read_text()))
-    if len(known_codes) != 24:
-        fail(f"expected 24 registered diagnostics, found {len(known_codes)}")
+    registry_text = (ROOT / "spec/diagnostics.md").read_text(encoding="utf-8")
+    code_phase = {code: phase for code, phase in REGISTRY_ROW.findall(registry_text)}
+    code_list = re.findall(r"^\|\s*`(MEDUI-E[0-9]{3})`\s*\|", registry_text, flags=re.MULTILINE)
+    known_codes = set(code_list)
+    if len(code_list) != len(known_codes):
+        fail("spec/diagnostics.md registers a code more than once")
+    if not BASELINE_CODES <= known_codes:
+        fail(f"baseline diagnostics dropped from the registry: {sorted(BASELINE_CODES - known_codes)}")
+    for phase in code_phase.values():
+        if phase not in PHASES:
+            fail(f"spec/diagnostics.md registers a code under an unknown phase: {phase}")
 
     # The consumer-manifest schema and governance/versioning.md state the same constraints; a
     # harness reads one and a maintainer reads the other, so they are checked against each other
     # rather than trusted to stay in step.
-    manifest_schema = json.loads((ROOT / "schemas/consumer-manifest.schema.json").read_text())
+    manifest_schema = load_json(ROOT / "schemas/consumer-manifest.schema.json")
     if set(manifest_schema["required"]) != {"repository", "commit", "capabilities", "positions"}:
         fail(f"consumer manifest required keys changed: {manifest_schema['required']}")
     if manifest_schema["additionalProperties"] is not False:
@@ -50,38 +92,57 @@ def main() -> None:
     if properties["capabilities"]["items"]["enum"] != CAPABILITIES:
         fail(f"capabilities changed: {properties['capabilities']['items']['enum']}")
 
-    aliases = json.loads((ROOT / "compat/mdx-e-aliases-v0.1.json").read_text())["aliases"]
-    if set(aliases.values()) != known_codes:
-        fail("MDX-E alias values must cover the canonical diagnostic registry exactly")
+    # The case schema is the source of truth for member names; the checks below read it rather
+    # than restating it, so a schema edit does not silently diverge from the validator.
+    case_schema = load_json(ROOT / "schemas/case.schema.json")
+    case_required = set(case_schema["required"])
+    case_top_level = set(case_schema["properties"])
+    if case_schema["additionalProperties"] is not False:
+        fail("the case schema must reject unknown keys")
+    inputs_keys = set(case_schema["properties"]["inputs"]["properties"])
+    expected_keys = set(case_schema["properties"]["expected"]["properties"])
+    expected_required = set(case_schema["properties"]["expected"]["required"])
+
+    aliases = load_json(ROOT / "compat/mdx-e-aliases-v0.1.json")["aliases"]
+    if not set(aliases.values()) <= known_codes:
+        fail("an MDX-E alias points outside the canonical diagnostic registry")
     for old, new in aliases.items():
         if old.replace("MDX-", "MEDUI-") != new:
             fail(f"alias changes numeric identity: {old} -> {new}")
 
     seen = set()
+    asserted_codes = set()
     cases = sorted((ROOT / "conformance").glob("**/case.json"))
     if not cases:
         fail("no conformance cases found")
     for path in cases:
-        case = json.loads(path.read_text(encoding="utf-8"))
-        required = {"id", "phase", "source", "expected"}
-        if not required <= case.keys() or set(case) - (required | {"inputs"}):
-            fail(f"{path.relative_to(ROOT)} has invalid top-level members")
-        if not CASE_ID.fullmatch(case["id"]) or case["id"] in seen:
-            fail(f"invalid or duplicate case id {case['id']}")
+        rel = path.relative_to(ROOT)
+        case = load_json(path)
+        if not isinstance(case, dict):
+            fail(f"{rel} is not a JSON object")
+        if not case_required <= case.keys() or set(case) - case_top_level:
+            fail(f"{rel} has invalid top-level members")
+        if not isinstance(case["id"], str) or not CASE_ID.fullmatch(case["id"]) or case["id"] in seen:
+            fail(f"invalid or duplicate case id {case['id']!r} in {rel}")
         seen.add(case["id"])
         if case["phase"] not in PHASES or path.parent.parent.name != case["phase"]:
             fail(f"{case['id']} has an invalid or mismatched phase")
+        if not isinstance(case["source"], str) or "/" in case["source"]:
+            fail(f"{case['id']} has an invalid source member")
         source = path.parent / case["source"]
         if not source.is_file() or source.suffix != ".medui":
             fail(f"{case['id']} source does not resolve")
         inputs = case.get("inputs", {})
-        if not isinstance(inputs, dict) or set(inputs) - {"themeTokens", "textPackages"}:
+        if not isinstance(inputs, dict) or set(inputs) - inputs_keys:
             fail(f"{case['id']} has invalid semantic inputs")
-        theme_tokens = inputs.get("themeTokens", [])
-        if (not isinstance(theme_tokens, list)
-                or any(not isinstance(token, str) or not token for token in theme_tokens)
-                or len(theme_tokens) != len(set(theme_tokens))):
-            fail(f"{case['id']} has invalid or duplicate theme tokens")
+        for collection in ("themeTokens", "imageIds", "templates"):
+            if collection not in inputs_keys:
+                continue
+            values = inputs.get(collection, [])
+            if (not isinstance(values, list)
+                    or any(not isinstance(value, str) or not value for value in values)
+                    or len(values) != len(set(values))):
+                fail(f"{case['id']} has invalid or duplicate {collection}")
         text_packages = inputs.get("textPackages", [])
         if not isinstance(text_packages, list):
             fail(f"{case['id']} has invalid text packages")
@@ -98,15 +159,33 @@ def main() -> None:
                 fail(f"{case['id']} has an invalid or duplicate locale/key")
             locales.add(locale)
         expected = case["expected"]
-        if set(expected) - {"valid", "diagnostics", "observations"}:
+        if not isinstance(expected, dict):
+            fail(f"{case['id']} expected is not a JSON object")
+        if not expected_required <= expected.keys() or set(expected) - expected_keys:
             fail(f"{case['id']} has invalid expected members")
         if not isinstance(expected.get("valid"), bool) or not isinstance(expected.get("diagnostics"), list):
             fail(f"{case['id']} has invalid expected shape")
         for diagnostic in expected["diagnostics"]:
-            if set(diagnostic) != {"code", "line", "column"} or not CODE.fullmatch(diagnostic["code"]):
+            if (not isinstance(diagnostic, dict)
+                    or set(diagnostic) != {"code", "line", "column"}
+                    or not isinstance(diagnostic["code"], str)
+                    or not CODE.fullmatch(diagnostic["code"])):
                 fail(f"{case['id']} has an invalid diagnostic expectation")
+            if not is_int(diagnostic["line"]) or not is_int(diagnostic["column"]):
+                fail(f"{case['id']} has a non-integer diagnostic position")
             if diagnostic["code"] not in known_codes or diagnostic["line"] < 0 or diagnostic["column"] < 0:
                 fail(f"{case['id']} references an invalid diagnostic")
+            registered_phase = code_phase.get(diagnostic["code"])
+            if registered_phase and registered_phase != case["phase"]:
+                fail(
+                    f"{case['id']} is a {case['phase']} case but {diagnostic['code']} "
+                    f"is registered under {registered_phase}"
+                )
+            asserted_codes.add(diagnostic["code"])
+
+    uncovered = sorted(known_codes - asserted_codes)
+    if uncovered:
+        note(f"{len(uncovered)} registered codes have no conformance case: {', '.join(uncovered)}")
 
     print(f"MedUI validation: OK ({len(cases)} cases, {len(known_codes)} diagnostics)")
 
