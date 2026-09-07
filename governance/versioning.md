@@ -7,6 +7,16 @@ already-defined outcome. Tags are immutable. Consumers pin the exact 40-characte
 A contract change is accepted only after every implementation claiming the affected capability
 passes the candidate commit. Capabilities are `syntax`, `semantics`, `layout`, and `safety`.
 
+## Current line: 0.2.0 (candidate)
+
+`VERSION` is `0.2.0`. The 0.2.0 line changes conformance outcomes relative to `0.1.0`: it adds
+`MEDUI-E035` and `MEDUI-E054`, repoints `conformance/layout/position-requires-fixed/` from
+`MEDUI-E051` to `MEDUI-E054`, and states that `@safety_critical` promotes `requirement`. Under the
+rule above it is a **candidate** until TrustSC and MduX each pass a pinned 0.2.0 commit at the
+precision they declare. Release candidates are tagged `v0.2.0-rc.N`; `v0.2.0` is tagged only once
+both implementations have passed. Consumers taking a pin from this line before then use a
+`version = "0.2.0-candidate"` label, exactly as they did for `0.1.0-candidate`.
+
 ## Schema identity
 
 Every file in `schemas/` carries an `$id` ending `/schemas/<MAJOR.MINOR>/<name>.schema.json`. The
