@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CONTAINMENT-MARGIN",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R02"
+  ],
+  "description": "containment margin",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "ink-containment",
+    "golden": [
+      2,
+      2,
+      4,
+      4
+    ],
+    "margin": 1,
+    "ink": [
+      1,
+      1,
+      6,
+      6
+    ]
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}

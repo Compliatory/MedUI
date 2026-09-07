@@ -3,13 +3,13 @@
 Status: Accepted
 
 Accepted on 2026-09-07 by Ambroise Leclerc, maintainer, by explicit instruction.
-Acceptance records the architectural direction below. Profile identifiers, schemas and the
-candidate conformance corpus remain delivery work; no consumer support is asserted.
+Acceptance records the architectural direction below. The profile identifiers, schemas and candidate
+conformance corpus are specified in [the 0.3.0 profile contract](../spec/profiles.md); no consumer
+support is asserted.
 
 Raised by [MedUI #15](https://github.com/Compliatory/MedUI/issues/15) from a comparison of the
-MduX and TrustSC verifiers. This record accepts the direction and identifies delivery decisions still to
-settle. It allocates no new profile names, check IDs or diagnostic codes; these require
-separate schema and corpus changes before consumer adoption.
+MduX and TrustSC verifiers. This record accepts the direction. The linked candidate delivery allocates optional profile/check
+identities with schemas and corpus; it allocates no language diagnostic codes.
 
 ## Problem
 
@@ -37,13 +37,15 @@ each repository.
 4. The required obligation set is derived independently of the report, so a producer that skips
    a check cannot pass by silence.
 
-## Delivery decisions remaining
+## Candidate delivery
 
-- Are these profiles part of MedUI, or a sibling contract that MedUI only references?
-- Which profiles ship first, and does either current consumer's behaviour become one of them
-  unchanged, or do both migrate?
-- Do capability and manifest schemas gain profile keys, and if so under which minor?
-- What is the migration path so existing `ColorHash` evidence is not silently reinterpreted?
+The profiles belong to MedUI as optional observation contracts, with no renderer implementation.
+0.3.0 introduces `MEDUI-PROFILE-RENDERED/1` (four distinct checks) and
+`MEDUI-PROFILE-EVIDENCE/1` (identity and independently supplied obligations), optional manifest
+claims, evidence and vector schemas, and synthetic conformance cases. The definitions choose
+explicit semantics; they do not assert that either consumer already implements them unchanged.
+Legacy checks run alongside the candidate checks and retain their original identities/baselines.
+See [profiles](../spec/profiles.md) for arithmetic, migration and the remaining consumer proof gate.
 
 ## Rollout
 

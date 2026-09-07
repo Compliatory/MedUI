@@ -1,0 +1,25 @@
+{
+  "id": "MEDUI-PROFILE-CASE-TINT-EMPTY",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R03"
+  ],
+  "description": "tint empty",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "tint-composition",
+    "tint": [
+      200,
+      100,
+      0
+    ],
+    "composites": 1,
+    "samples": []
+  },
+  "expected": {
+    "outcome": "fail"
+  }
+}

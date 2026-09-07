@@ -1,0 +1,26 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CONTAINMENT-EMPTY",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R02"
+  ],
+  "description": "containment empty",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "ink-containment",
+    "golden": [
+      2,
+      2,
+      4,
+      4
+    ],
+    "margin": 1,
+    "ink": null
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}

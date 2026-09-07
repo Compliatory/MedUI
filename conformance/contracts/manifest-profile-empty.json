@@ -1,0 +1,15 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-MANIFEST-PROFILE-EMPTY",
+  "schema": "consumer-manifest",
+  "description": "manifest profile empty",
+  "document": {
+    "repository": "https://github.com/Compliatory/MedUI",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capabilities": [
+      "syntax"
+    ],
+    "positions": "full",
+    "profiles": []
+  },
+  "valid": false
+}

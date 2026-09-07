@@ -1,0 +1,50 @@
+{
+  "id": "MEDUI-PROFILE-CASE-TINT-BACKGROUND",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R03"
+  ],
+  "description": "tint background",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "tint-composition",
+    "tint": [
+      200,
+      100,
+      50
+    ],
+    "composites": 1,
+    "samples": [
+      {
+        "background": [
+          100,
+          100,
+          100
+        ],
+        "rgb": [
+          150,
+          100,
+          75
+        ]
+      },
+      {
+        "background": [
+          100,
+          100,
+          100
+        ],
+        "rgb": [
+          200,
+          100,
+          50
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}

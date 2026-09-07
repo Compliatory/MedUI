@@ -1,0 +1,14 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-MANIFEST-LEGACY",
+  "schema": "consumer-manifest",
+  "description": "manifest legacy",
+  "document": {
+    "repository": "https://github.com/Compliatory/MedUI",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capabilities": [
+      "syntax"
+    ],
+    "positions": "full"
+  },
+  "valid": true
+}

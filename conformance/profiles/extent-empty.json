@@ -1,0 +1,25 @@
+{
+  "id": "MEDUI-PROFILE-CASE-EXTENT-EMPTY",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R01"
+  ],
+  "description": "extent empty",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "extent-equality",
+    "golden": [
+      2,
+      2,
+      4,
+      4
+    ],
+    "ink": null
+  },
+  "expected": {
+    "outcome": "fail"
+  }
+}

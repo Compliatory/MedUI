@@ -1,0 +1,15 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-MANIFEST-UNKNOWN-KEY",
+  "schema": "consumer-manifest",
+  "description": "manifest unknown key",
+  "document": {
+    "repository": "https://github.com/Compliatory/MedUI",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capabilities": [
+      "syntax"
+    ],
+    "positions": "full",
+    "profile": []
+  },
+  "valid": false
+}

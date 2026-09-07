@@ -1,0 +1,24 @@
+{
+  "status": "candidate",
+  "profiles": [
+    {
+      "id": "MEDUI-PROFILE-RENDERED",
+      "version": 1,
+      "rules": [
+        "R01",
+        "R02",
+        "R03",
+        "R04"
+      ]
+    },
+    {
+      "id": "MEDUI-PROFILE-EVIDENCE",
+      "version": 1,
+      "rules": [
+        "E01",
+        "E02",
+        "E03"
+      ]
+    }
+  ]
+}

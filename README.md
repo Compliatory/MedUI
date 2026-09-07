@@ -14,6 +14,7 @@ does not establish certification, regulatory compliance, or suitability for a pa
 
 - `decisions/` — stable shared decisions (`MEDUI-DEC-*`).
 - `spec/` — grammar, semantic model, and diagnostic contract.
+- `profiles/` — optional candidate profile identities; definitions in `spec/profiles.md`.
 - `schemas/` — machine-readable conformance and diagnostic schemas.
 - `conformance/` — portable cases grouped by compiler phase.
 - `authoring/` — implementation-neutral author guidance.

@@ -1,0 +1,30 @@
+{
+  "id": "MEDUI-PROFILE-CASE-EXTENT-EXACT",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R01"
+  ],
+  "description": "extent exact",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "extent-equality",
+    "golden": [
+      2,
+      2,
+      4,
+      4
+    ],
+    "ink": [
+      2,
+      2,
+      4,
+      4
+    ]
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}

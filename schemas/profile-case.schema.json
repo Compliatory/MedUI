@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/schemas/0.3/profile-case.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "profile",
+    "rules",
+    "description",
+    "inputs",
+    "expected"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^MEDUI-PROFILE-CASE-[A-Z0-9-]+$"
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "MEDUI-PROFILE-RENDERED",
+            "MEDUI-PROFILE-EVIDENCE"
+          ]
+        },
+        "version": {
+          "const": 1
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "R01",
+          "R02",
+          "R03",
+          "R04",
+          "E01",
+          "E02",
+          "E03"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputs": {
+      "type": "object",
+      "required": [
+        "operation"
+      ],
+      "properties": {
+        "operation": {
+          "enum": [
+            "rendered-check",
+            "aggregate-evidence"
+          ]
+        }
+      }
+    },
+    "expected": {
+      "type": "object"
+    }
+  }
+}

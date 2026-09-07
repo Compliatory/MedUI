@@ -1,0 +1,21 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-MANIFEST-PROFILE-EXTRA",
+  "schema": "consumer-manifest",
+  "description": "manifest profile extra",
+  "document": {
+    "repository": "https://github.com/Compliatory/MedUI",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capabilities": [
+      "syntax"
+    ],
+    "positions": "full",
+    "profiles": [
+      {
+        "id": "MEDUI-PROFILE-RENDERED",
+        "version": 1,
+        "extra": true
+      }
+    ]
+  },
+  "valid": false
+}

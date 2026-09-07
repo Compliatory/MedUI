@@ -1,0 +1,24 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-MANIFEST-PROFILE-DUPLICATE",
+  "schema": "consumer-manifest",
+  "description": "manifest profile duplicate",
+  "document": {
+    "repository": "https://github.com/Compliatory/MedUI",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capabilities": [
+      "syntax"
+    ],
+    "positions": "full",
+    "profiles": [
+      {
+        "id": "MEDUI-PROFILE-RENDERED",
+        "version": 1
+      },
+      {
+        "id": "MEDUI-PROFILE-RENDERED",
+        "version": 1
+      }
+    ]
+  },
+  "valid": false
+}
