@@ -58,7 +58,10 @@
           "id": {
             "enum": [
               "MEDUI-PROFILE-RENDERED",
-              "MEDUI-PROFILE-EVIDENCE"
+              "MEDUI-PROFILE-EVIDENCE",
+              "MEDUI-PROFILE-INTERACTION",
+              "MEDUI-PROFILE-BINDING",
+              "MEDUI-PROFILE-PRESENTATION"
             ]
           },
           "version": {

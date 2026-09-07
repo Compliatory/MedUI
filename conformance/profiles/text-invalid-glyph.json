@@ -1,0 +1,29 @@
+{
+  "id": "MEDUI-PROFILE-CASE-TEXT-INVALID-GLYPH",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "text invalid glyph",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "TextInput",
+    "declaredSource": "value",
+    "value": "z",
+    "glyphs": [
+      "a",
+      "\ud83d\ude00"
+    ],
+    "maxLength": 2
+  },
+  "expected": {
+    "valid": false
+  }
+}

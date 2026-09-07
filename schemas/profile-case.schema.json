@@ -27,7 +27,10 @@
         "id": {
           "enum": [
             "MEDUI-PROFILE-RENDERED",
-            "MEDUI-PROFILE-EVIDENCE"
+            "MEDUI-PROFILE-EVIDENCE",
+            "MEDUI-PROFILE-INTERACTION",
+            "MEDUI-PROFILE-BINDING",
+            "MEDUI-PROFILE-PRESENTATION"
           ]
         },
         "version": {
@@ -45,7 +48,20 @@
           "R04",
           "E01",
           "E02",
-          "E03"
+          "E03",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "I06",
+          "B01",
+          "B02",
+          "B03",
+          "B04",
+          "P01",
+          "P02",
+          "P03"
         ]
       },
       "minItems": 1,
@@ -64,7 +80,15 @@
         "operation": {
           "enum": [
             "rendered-check",
-            "aggregate-evidence"
+            "aggregate-evidence",
+            "normalize",
+            "hit",
+            "edit",
+            "boundary",
+            "events",
+            "bind",
+            "pixels",
+            "present"
           ]
         }
       }

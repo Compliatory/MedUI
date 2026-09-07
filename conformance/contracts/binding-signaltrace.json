@@ -1,0 +1,23 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-SIGNALTRACE",
+  "schema": "binding",
+  "description": "binding signaltrace",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "SignalTrace",
+        "value": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "valid": true
+}

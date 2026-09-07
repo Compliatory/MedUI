@@ -18,7 +18,9 @@
     "schema": {
       "enum": [
         "consumer-manifest",
-        "evidence"
+        "evidence",
+        "presentation",
+        "binding"
       ]
     },
     "description": {

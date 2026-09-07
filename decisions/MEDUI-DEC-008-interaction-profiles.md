@@ -3,13 +3,14 @@
 Status: Accepted
 
 Accepted on 2026-09-07 by Ambroise Leclerc, maintainer, by explicit instruction.
-Acceptance records the architectural direction below. Profile identifiers, schemas and the
-candidate conformance corpus remain delivery work; no consumer support is asserted.
+Acceptance records the architectural direction below. The profile identifiers, schemas and candidate
+conformance corpus are specified in [the 0.3.0 profile contract](../spec/profiles.md); no consumer
+support is asserted.
 
 Raised by [MedUI #16](https://github.com/Compliatory/MedUI/issues/16) from a comparison of the
 MduX and TrustSC runtimes for [MduX #312](https://github.com/ambroise-leclerc/MduX/issues/312).
-This record accepts the architectural direction and behavioral defaults below. Detailed
-profile definitions and their conformance cases remain prerequisites for consumer claims.
+This record accepts the architectural direction and behavioral defaults below. The linked detailed
+profile definitions and conformance cases are candidate inputs, not consumer conformance evidence.
 
 ## Problem
 
@@ -48,15 +49,16 @@ Accepted direction for the profile definitions:
    pixels; an exact-pixel corpus case identifies profile, theme, fonts, assets, surface and
    backend.
 
-## Delivery decisions remaining
+## Candidate delivery
 
-- Does an interaction profile belong in MedUI at all, or does the contract stay layout-only and
-  point at a separate runtime contract?
-- Which of the proposed defaults are actually shared, versus a starting point for negotiation
-  between the two implementations?
-- What is the smallest first profile — hit testing and press/release only — that both
-  implementations could pass without changing observable behaviour?
-- How do capability and manifest schemas carry a profile claim, and under which minor?
+The optional logical observations belong to MedUI; device-runtime implementations remain outside
+this repository. 0.3.0 adds independent `MEDUI-PROFILE-INTERACTION/1`,
+`MEDUI-PROFILE-BINDING/1`, and `MEDUI-PROFILE-PRESENTATION/1` claims. The accepted defaults above
+are made explicit in [profiles](../spec/profiles.md), including whole-batch activation suppression
+on overflow. Presentation describes declared appearances rather than imposing either consumer's
+widget style. Synthetic cases cover every component and the logical input/update boundaries.
+No unchanged-behaviour parity is claimed; consumers must evaluate their migration against the
+candidate corpus before claiming any profile.
 
 ## Rollout
 

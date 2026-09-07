@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-WRONG-VULKANVIEWPORT",
+  "schema": "binding",
+  "description": "binding wrong vulkanviewport",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "VulkanViewport",
+        "value": null
+      }
+    ]
+  },
+  "valid": false
+}

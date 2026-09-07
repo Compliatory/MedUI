@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-WRONG-CLOCK",
+  "schema": "binding",
+  "description": "binding wrong clock",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "clock",
+        "snapshot": "s1",
+        "component": "Clock",
+        "value": null
+      }
+    ]
+  },
+  "valid": false
+}

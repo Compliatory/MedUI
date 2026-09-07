@@ -1,0 +1,48 @@
+{
+  "id": "MEDUI-PROFILE-CASE-VIEWPORT-EXCESS-PIXELS",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B04"
+  ],
+  "description": "viewport excess pixels",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "VulkanViewport",
+    "declaredSource": "value",
+    "value": {
+      "width": 1,
+      "height": 1,
+      "format": "RGBA8",
+      "rgba8": [
+        0,
+        0,
+        0,
+        255,
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    "declaredSize": [
+      1,
+      1
+    ],
+    "background": [
+      0,
+      0,
+      100
+    ]
+  },
+  "expected": {
+    "valid": false
+  }
+}

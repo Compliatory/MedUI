@@ -49,9 +49,10 @@ a member reports `MEDUI-E034`; a value of the wrong *kind* still reports `MEDUI-
 
 Every member above is pinned by a positive conformance case as well as a negative one: a closed set
 whose members are all rejected would otherwise satisfy the rejection cases while implementing an
-empty vocabulary. The renderings are normative but not yet mechanically checkable — there is no
-text-budget case and no font model in this contract — so `clock-format-members` carries them as an
-`observations` entry, which records the fact without yet asserting it.
+empty vocabulary. The compiler corpus has no text-budget case or font model, so
+`clock-format-members` carries the renderings as an `observations` entry. The optional candidate
+[binding profile](profiles.md) separately asserts formatted text from injected civil time; those
+string observations do not establish font measurement or pixel output.
 
 Closing `format` is what makes a clock measurable. Because the rendering of each member is fixed
 here, a text-budget pass knows a `TimeSeconds` clock draws eight glyphs and can check them against

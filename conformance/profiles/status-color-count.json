@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-STATUS-COLOR-COUNT",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B02"
+  ],
+  "description": "status color count",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "StatusIndicator",
+    "declaredSource": "value",
+    "value": 0,
+    "states": [
+      "first",
+      "second"
+    ],
+    "colors": [
+      "red"
+    ]
+  },
+  "expected": {
+    "valid": false
+  }
+}

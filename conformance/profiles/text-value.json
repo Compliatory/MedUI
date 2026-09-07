@@ -1,0 +1,30 @@
+{
+  "id": "MEDUI-PROFILE-CASE-TEXT-VALUE",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "text value",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "TextInput",
+    "declaredSource": "value",
+    "value": "a\ud83d\ude00",
+    "glyphs": [
+      "a",
+      "\ud83d\ude00"
+    ],
+    "maxLength": 2
+  },
+  "expected": {
+    "valid": true,
+    "text": "a\ud83d\ude00"
+  }
+}

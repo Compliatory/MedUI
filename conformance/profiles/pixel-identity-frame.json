@@ -1,0 +1,57 @@
+{
+  "id": "MEDUI-PROFILE-CASE-PIXEL-IDENTITY-FRAME",
+  "profile": {
+    "id": "MEDUI-PROFILE-PRESENTATION",
+    "version": 1
+  },
+  "rules": [
+    "P03"
+  ],
+  "description": "pixel identity frame",
+  "inputs": {
+    "operation": "pixels",
+    "captureIdentity": {
+      "declaration": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "backend": "synthetic",
+      "surface": [
+        1,
+        1
+      ],
+      "locale": null,
+      "scenario": "static",
+      "frame": 0
+    },
+    "baselineIdentity": {
+      "declaration": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "backend": "synthetic",
+      "surface": [
+        1,
+        1
+      ],
+      "locale": null,
+      "scenario": "static",
+      "frame": 1
+    },
+    "pixels": [
+      0,
+      0,
+      0,
+      255
+    ],
+    "baselinePixels": [
+      0,
+      0,
+      0,
+      255
+    ]
+  },
+  "expected": {
+    "outcome": "fail"
+  }
+}

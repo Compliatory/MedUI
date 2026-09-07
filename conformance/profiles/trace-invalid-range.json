@@ -1,0 +1,32 @@
+{
+  "id": "MEDUI-PROFILE-CASE-TRACE-INVALID-RANGE",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B03"
+  ],
+  "description": "trace invalid range",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "SignalTrace",
+    "declaredSource": "value",
+    "value": [
+      2,
+      -1,
+      3
+    ],
+    "capacity": 3,
+    "minimum": 4,
+    "maximum": 3
+  },
+  "expected": {
+    "valid": false
+  }
+}

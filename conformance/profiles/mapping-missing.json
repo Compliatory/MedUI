@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-MAPPING-MISSING",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "mapping missing",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "TextInput",
+    "declaredSource": "value",
+    "value": null,
+    "entries": [],
+    "glyphs": [
+      "a",
+      "b"
+    ],
+    "maxLength": 4
+  },
+  "expected": {
+    "valid": false,
+    "publishedSnapshot": null
+  }
+}

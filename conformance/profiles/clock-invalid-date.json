@@ -1,0 +1,32 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CLOCK-INVALID-DATE",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "clock invalid date",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "Clock",
+    "declaredSource": "clock",
+    "value": [
+      2025,
+      2,
+      29,
+      1,
+      2,
+      3
+    ],
+    "format": "TimeSeconds"
+  },
+  "expected": {
+    "valid": false
+  }
+}

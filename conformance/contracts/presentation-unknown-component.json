@@ -1,0 +1,38 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-PRESENTATION-UNKNOWN-COMPONENT",
+  "schema": "presentation",
+  "description": "presentation unknown component",
+  "document": {
+    "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "backend": "synthetic",
+    "surface": [
+      20,
+      20
+    ],
+    "variants": [
+      {
+        "component": "Unknown",
+        "pressed": false,
+        "focused": false,
+        "face": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "label": null,
+        "tint": [
+          255,
+          0,
+          0,
+          255
+        ],
+        "caret": null,
+        "clip": true
+      }
+    ]
+  },
+  "valid": false
+}

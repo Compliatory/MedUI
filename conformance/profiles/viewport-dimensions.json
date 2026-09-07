@@ -1,0 +1,44 @@
+{
+  "id": "MEDUI-PROFILE-CASE-VIEWPORT-DIMENSIONS",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B04"
+  ],
+  "description": "viewport dimensions",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "VulkanViewport",
+    "declaredSource": "value",
+    "value": {
+      "width": 2,
+      "height": 1,
+      "format": "RGBA8",
+      "rgba8": [
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    "declaredSize": [
+      1,
+      1
+    ],
+    "background": [
+      0,
+      0,
+      100
+    ]
+  },
+  "expected": {
+    "valid": false
+  }
+}

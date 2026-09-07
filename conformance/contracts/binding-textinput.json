@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-TEXTINPUT",
+  "schema": "binding",
+  "description": "binding textinput",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "TextInput",
+        "value": "a\ud83d\ude00"
+      }
+    ]
+  },
+  "valid": true
+}

@@ -1,0 +1,33 @@
+{
+  "id": "MEDUI-PROFILE-CASE-STATIC-EXTRA-BUTTON",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "static extra button",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "Button",
+    "declaredSource": "value",
+    "value": null,
+    "entries": [
+      {
+        "screen": "screen",
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "value": "ab"
+      }
+    ]
+  },
+  "expected": {
+    "valid": false
+  }
+}

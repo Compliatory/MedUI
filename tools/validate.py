@@ -223,6 +223,11 @@ def main() -> None:
                      for check in evidence_check["id"]["enum"]}
     if evidence_key not in declared or schema_checks != documented_checks:
         fail("evidence profile/check identities differ from the registry or specification")
+    fixture_problems = validate(
+        load_json(ROOT / "profiles/presentation-fixture.json"), schemas["presentation"]
+    )
+    if fixture_problems:
+        fail(f"invalid synthetic presentation fixture: {fixture_problems}")
     claim_schema = properties["profiles"]["items"]
     schema_claims = {
         (identifier, claim_schema["properties"]["version"]["const"])

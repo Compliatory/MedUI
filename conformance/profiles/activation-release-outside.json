@@ -1,0 +1,58 @@
+{
+  "id": "MEDUI-PROFILE-CASE-ACTIVATION-RELEASE-OUTSIDE",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I03"
+  ],
+  "description": "activation release outside",
+  "inputs": {
+    "operation": "events",
+    "surface": [
+      20,
+      20
+    ],
+    "nodes": [
+      {
+        "id": "button",
+        "component": "Button",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "eligible": true,
+        "source": "confirm"
+      }
+    ],
+    "events": [
+      {
+        "type": "press",
+        "point": [
+          2,
+          2
+        ]
+      },
+      {
+        "type": "release",
+        "point": [
+          12,
+          12
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "outputs": [],
+    "armed": null
+  }
+}

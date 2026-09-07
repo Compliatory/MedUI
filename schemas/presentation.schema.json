@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/schemas/0.3/presentation.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "theme",
+    "font",
+    "assets",
+    "backend",
+    "surface",
+    "variants"
+  ],
+  "properties": {
+    "theme": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "font": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "assets": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "backend": {
+      "type": "string",
+      "minLength": 1
+    },
+    "surface": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "component",
+          "pressed",
+          "focused",
+          "face",
+          "label",
+          "tint",
+          "caret",
+          "clip"
+        ],
+        "properties": {
+          "component": {
+            "enum": [
+              "Row",
+              "CriticalButton",
+              "Button",
+              "VulkanViewport",
+              "SignalTrace",
+              "NumericDisplay",
+              "StatusIndicator",
+              "Label",
+              "Clock",
+              "Image",
+              "TextInput"
+            ]
+          },
+          "pressed": {
+            "type": "boolean"
+          },
+          "focused": {
+            "type": "boolean"
+          },
+          "face": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tint": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "caret": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "clip": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 1
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "id": "MEDUI-PROFILE-CASE-NUMERIC-DIGIT-BOUND",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B02"
+  ],
+  "description": "numeric digit bound",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "NumericDisplay",
+    "declaredSource": "value",
+    "value": {
+      "integer": "1234567",
+      "scale": 0,
+      "prefix": "",
+      "suffix": ""
+    },
+    "maxDigits": 6,
+    "maxScale": 3
+  },
+  "expected": {
+    "valid": false
+  }
+}

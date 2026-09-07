@@ -17,6 +17,18 @@
       {
         "id": "MEDUI-PROFILE-EVIDENCE",
         "version": 1
+      },
+      {
+        "id": "MEDUI-PROFILE-INTERACTION",
+        "version": 1
+      },
+      {
+        "id": "MEDUI-PROFILE-BINDING",
+        "version": 1
+      },
+      {
+        "id": "MEDUI-PROFILE-PRESENTATION",
+        "version": 1
       }
     ]
   },

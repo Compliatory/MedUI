@@ -1,0 +1,51 @@
+{
+  "id": "MEDUI-PROFILE-CASE-ACTIVATION-UNARMED",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I03"
+  ],
+  "description": "activation unarmed",
+  "inputs": {
+    "operation": "events",
+    "surface": [
+      20,
+      20
+    ],
+    "nodes": [
+      {
+        "id": "button",
+        "component": "Button",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "eligible": true,
+        "source": "confirm"
+      }
+    ],
+    "events": [
+      {
+        "type": "release",
+        "point": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "outputs": [],
+    "armed": null
+  }
+}

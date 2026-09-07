@@ -11,7 +11,7 @@ claims are independently versioned and tested as specified in [profiles](../spec
 ## Current line: 0.3.0 (candidate)
 
 `VERSION` is `0.3.0`. This candidate extends the accepted manifest shape with optional `profiles`
-and adds observation contracts, evidence schemas and synthetic cases for MEDUI-DEC-007.
+and adds observation contracts, evidence schemas and synthetic cases for MEDUI-DEC-007/008.
 Existing compiler outcomes are unchanged from 0.2.0. Each implementation claiming an affected
 capability/profile must pass the exact candidate SHA before release or advertising support.
 Use `0.3.0-candidate` for an informational pin label and `v0.3.0-rc.N` for candidate tags;

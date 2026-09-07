@@ -1,0 +1,46 @@
+{
+  "id": "MEDUI-PROFILE-CASE-HIT-NEGATIVE",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I01",
+    "I02"
+  ],
+  "description": "hit negative",
+  "inputs": {
+    "operation": "hit",
+    "surface": [
+      20,
+      20
+    ],
+    "nodes": [
+      {
+        "id": "button",
+        "component": "Button",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "eligible": true,
+        "source": "confirm"
+      }
+    ],
+    "point": [
+      -1,
+      0
+    ]
+  },
+  "expected": {
+    "target": null
+  }
+}

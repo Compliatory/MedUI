@@ -1,0 +1,70 @@
+{
+  "id": "MEDUI-PROFILE-CASE-EDIT-REJECT-REPEAT-INSERT",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I06"
+  ],
+  "description": "edit reject repeat insert",
+  "inputs": {
+    "operation": "edit",
+    "surface": [
+      20,
+      20
+    ],
+    "nodes": [
+      {
+        "id": "text",
+        "component": "TextInput",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "eligible": true,
+        "source": "name"
+      }
+    ],
+    "focused": "text",
+    "text": "ab",
+    "caret": 1,
+    "selection": [
+      1,
+      1
+    ],
+    "glyphs": [
+      "a",
+      "b",
+      "\u00e9",
+      "\ud83d\ude00"
+    ],
+    "maxLength": 4,
+    "events": [
+      {
+        "type": "insert",
+        "text": "a",
+        "repeat": true
+      }
+    ]
+  },
+  "expected": {
+    "text": "ab",
+    "caret": 1,
+    "selection": [
+      1,
+      1
+    ],
+    "rejectedEvents": [
+      0
+    ]
+  }
+}

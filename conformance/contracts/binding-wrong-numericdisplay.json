@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-WRONG-NUMERICDISPLAY",
+  "schema": "binding",
+  "description": "binding wrong numericdisplay",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "NumericDisplay",
+        "value": null
+      }
+    ]
+  },
+  "valid": false
+}

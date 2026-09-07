@@ -1,0 +1,32 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CLOCK-YEAR-BOUND",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "clock year bound",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "Clock",
+    "declaredSource": "clock",
+    "value": [
+      10000,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "format": "TimeSeconds"
+  },
+  "expected": {
+    "valid": false
+  }
+}

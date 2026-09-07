@@ -19,6 +19,37 @@
         "E02",
         "E03"
       ]
+    },
+    {
+      "id": "MEDUI-PROFILE-INTERACTION",
+      "version": 1,
+      "rules": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "I06"
+      ]
+    },
+    {
+      "id": "MEDUI-PROFILE-BINDING",
+      "version": 1,
+      "rules": [
+        "B01",
+        "B02",
+        "B03",
+        "B04"
+      ]
+    },
+    {
+      "id": "MEDUI-PROFILE-PRESENTATION",
+      "version": 1,
+      "rules": [
+        "P01",
+        "P02",
+        "P03"
+      ]
     }
   ]
 }

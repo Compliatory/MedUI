@@ -1,0 +1,16 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-PRESENTATION-MISSING-VARIANTS",
+  "schema": "presentation",
+  "description": "presentation missing variants",
+  "document": {
+    "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "backend": "synthetic",
+    "surface": [
+      20,
+      20
+    ]
+  },
+  "valid": false
+}

@@ -1,0 +1,356 @@
+{
+  "id": "MEDUI-PROFILE-CASE-PRESENTATION-VULKANVIEWPORT",
+  "profile": {
+    "id": "MEDUI-PROFILE-PRESENTATION",
+    "version": 1
+  },
+  "rules": [
+    "P01",
+    "P02"
+  ],
+  "description": "presentation vulkanviewport",
+  "inputs": {
+    "operation": "present",
+    "configuration": {
+      "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "backend": "synthetic",
+      "surface": [
+        20,
+        20
+      ],
+      "variants": [
+        {
+          "component": "Row",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": null,
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "CriticalButton",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "Button",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "VulkanViewport",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": null,
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "SignalTrace",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": null,
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "NumericDisplay",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "StatusIndicator",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "Label",
+          "pressed": false,
+          "focused": false,
+          "face": null,
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "Clock",
+          "pressed": false,
+          "focused": false,
+          "face": null,
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "Image",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": null,
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "TextInput",
+          "pressed": false,
+          "focused": false,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "Button",
+          "pressed": true,
+          "focused": false,
+          "face": [
+            1,
+            1,
+            8,
+            8
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": null,
+          "clip": true
+        },
+        {
+          "component": "TextInput",
+          "pressed": false,
+          "focused": true,
+          "face": [
+            0,
+            0,
+            10,
+            10
+          ],
+          "label": [
+            1,
+            2,
+            8,
+            6
+          ],
+          "tint": [
+            255,
+            0,
+            0,
+            255
+          ],
+          "caret": [
+            2,
+            2,
+            1,
+            6
+          ],
+          "clip": true
+        }
+      ]
+    },
+    "node": {
+      "component": "VulkanViewport",
+      "rect": [
+        3,
+        4,
+        10,
+        10
+      ],
+      "pressed": false,
+      "focused": false
+    }
+  },
+  "expected": {
+    "valid": true,
+    "face": [
+      3,
+      4,
+      10,
+      10
+    ],
+    "label": null,
+    "tint": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "caret": null,
+    "clip": true
+  }
+}
