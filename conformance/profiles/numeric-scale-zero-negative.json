@@ -1,0 +1,33 @@
+{
+  "id": "MEDUI-PROFILE-CASE-NUMERIC-SCALE-ZERO-NEGATIVE",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B02"
+  ],
+  "description": "Scale zero omits the decimal point before the suffix.",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "NumericDisplay",
+    "declaredSource": "value",
+    "value": {
+      "integer": "-12",
+      "scale": 0,
+      "prefix": "[",
+      "suffix": "]"
+    },
+    "maxDigits": 6,
+    "maxScale": 3
+  },
+  "expected": {
+    "valid": true,
+    "text": "[-12]"
+  }
+}

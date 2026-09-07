@@ -1,7 +1,7 @@
 {
   "id": "MEDUI-PROFILE-CASE-PIXEL-IDENTITY-SURFACE",
   "profile": {
-    "id": "MEDUI-PROFILE-PRESENTATION",
+    "id": "MEDUI-PROFILE-PIXELS",
     "version": 1
   },
   "rules": [
@@ -14,7 +14,12 @@
       "declaration": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
       "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "assets": [
+        {
+          "id": "image/ui",
+          "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ],
       "backend": "synthetic",
       "surface": [
         1,
@@ -28,7 +33,12 @@
       "declaration": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
       "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "assets": [
+        {
+          "id": "image/ui",
+          "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ],
       "backend": "synthetic",
       "surface": [
         10,

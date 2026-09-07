@@ -4,7 +4,12 @@
   "description": "presentation missing font",
   "document": {
     "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "assets": [
+      {
+        "id": "image/ui",
+        "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    ],
     "backend": "synthetic",
     "surface": [
       20,

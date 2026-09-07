@@ -47,7 +47,13 @@
       "version": 1,
       "rules": [
         "P01",
-        "P02",
+        "P02"
+      ]
+    },
+    {
+      "id": "MEDUI-PROFILE-PIXELS",
+      "version": 1,
+      "rules": [
         "P03"
       ]
     }

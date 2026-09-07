@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-MANIFEST-PIXELS-ONLY",
+  "schema": "consumer-manifest",
+  "description": "A consumer can independently claim pixels-only",
+  "document": {
+    "repository": "https://github.com/Compliatory/MedUI",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "capabilities": [
+      "syntax"
+    ],
+    "positions": "full",
+    "profiles": [
+      {
+        "id": "MEDUI-PROFILE-PIXELS",
+        "version": 1
+      }
+    ]
+  },
+  "valid": true
+}

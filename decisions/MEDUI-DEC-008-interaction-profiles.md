@@ -53,7 +53,8 @@ Accepted direction for the profile definitions:
 
 The optional logical observations belong to MedUI; device-runtime implementations remain outside
 this repository. 0.3.0 adds independent `MEDUI-PROFILE-INTERACTION/1`,
-`MEDUI-PROFILE-BINDING/1`, and `MEDUI-PROFILE-PRESENTATION/1` claims. The accepted defaults above
+`MEDUI-PROFILE-BINDING/1`, `MEDUI-PROFILE-PRESENTATION/1` (P01/P02), and the separately optional
+`MEDUI-PROFILE-PIXELS/1` (P03) claims. The accepted defaults above
 are made explicit in [profiles](../spec/profiles.md), including whole-batch activation suppression
 on overflow. Presentation describes declared appearances rather than imposing either consumer's
 widget style. Synthetic cases cover every component and the logical input/update boundaries.

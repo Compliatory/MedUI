@@ -29,6 +29,10 @@
       {
         "id": "MEDUI-PROFILE-PRESENTATION",
         "version": 1
+      },
+      {
+        "id": "MEDUI-PROFILE-PIXELS",
+        "version": 1
       }
     ]
   },

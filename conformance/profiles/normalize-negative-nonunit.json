@@ -1,0 +1,34 @@
+{
+  "id": "MEDUI-PROFILE-CASE-NORMALIZE-NEGATIVE-NONUNIT",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I01"
+  ],
+  "description": "Mathematical floor of -3/2 and -5/2 differs from truncation toward zero.",
+  "inputs": {
+    "operation": "normalize",
+    "surface": [
+      20,
+      20
+    ],
+    "devicePoint": [
+      -3,
+      -5
+    ],
+    "origin": [
+      0,
+      0
+    ],
+    "scaleNumerator": 2,
+    "scaleDenominator": 1
+  },
+  "expected": {
+    "point": [
+      -2,
+      -3
+    ]
+  }
+}

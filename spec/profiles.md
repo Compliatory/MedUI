@@ -11,6 +11,8 @@ are optional, independent of compiler phases, and require every case for the cla
 `profiles` is an optional, nonempty array in the consumer manifest; duplicate claims are rejected.
 An absent array claims nothing. An unknown ID/version or unknown manifest key is rejected.
 Presentation and binding claims do not imply interaction or exact-pixel equivalence.
+`MEDUI-PROFILE-PRESENTATION/1` covers P01/P02 only. Exact-pixel support is a separate optional
+`MEDUI-PROFILE-PIXELS/1` claim covering P03; a presentation-only consumer need not claim it.
 
 Each `conformance/profiles/*.json` file is a portable observation vector. `inputs` describes
 public observations or a logical scenario, and `expected` is the required observable result.
@@ -140,6 +142,8 @@ report bytes are not conformance outputs; MedUI prescribes no canonical report s
 Consumers may retain their own canonical committed reports and emit this envelope as a derived
 artifact. The schema's rendered profile/check IDs and versions track the candidate registry and
 R01–R04; adding a released version requires updating the schema identity under the minor policy.
+This envelope is intentionally rendered-only. Interaction, binding, presentation and pixel
+profiles produce their specified operation outputs rather than E01 report rows.
 
 ## MEDUI-PROFILE-INTERACTION, version 1
 
@@ -150,7 +154,9 @@ not a platform input API or device-runtime policy.
 
 - **I01 — coordinates.** Input coordinates and origin are integers; positive integer `scaleNumerator`
   and `scaleDenominator` give device pixels per authored pixel. Normalize each axis exactly once
-  with `floor((device-origin)*scaleDenominator/scaleNumerator)`, including negative values. Points
+  with `floor((device-origin)*scaleDenominator/scaleNumerator)`, including negative values.
+  Floor means rounding toward negative infinity, not integer truncation toward zero: `-1/2`
+  normalizes to `-1`. Points
   outside `[0,width) × [0,height)` hit nothing; they are never clamped to an edge control.
 - **I02 — hit.** Search reverse paint order using half-open rectangles intersected with the
   surface and explicit ancestor clip. The first containing node occludes every node below it,
@@ -200,7 +206,8 @@ checks. `bind` vectors isolate a single node and may repeat screen in entries to
 - **B02 — formatting.** NumericDisplay receives a signed decimal integer string without leading
   zeros (except `0`), a nonnegative decimal scale, and explicit prefix/suffix. It inserts a decimal
   point `scale` digits from the right, zero-padding as needed, with ASCII digits, `.` separator,
-  no grouping and no rounding. Declarations supply positive `maxDigits` (excluding sign) and
+  no grouping and no rounding. At `scale = 0`, omit the decimal point entirely; for example,
+  integer `123` renders `123`, not `123.`. Declarations supply positive `maxDigits` (excluding sign) and
   nonnegative `maxScale`; exceeding either fails. Prefix/suffix are baked template strings, not
   arbitrary application text. Negative zero is invalid. Clock renders `HH:MM:SS` or
   `YYYY-MM-DD HH:MM:SS`, zero-padded. StatusIndicator receives a zero-based integer index into
@@ -213,8 +220,14 @@ checks. `bind` vectors isolate a single node and may repeat screen in entries to
   bottom and pixels left to right, no padding. Invalid dimensions, lengths, format or channels
   fail atomically; no inferred resizing, wraparound or clamping. Composition over opaque RGB8
   background is per channel `floor((src*alpha + bg*(255-alpha) + 127)/255)` with output alpha 255.
+  Alpha is the source pixel's byte alpha; there is no additional glyph-coverage factor. Thus a
+  consumer blend with separate source-alpha and coverage inputs uses full coverage (255).
   Transparent source leaves background unchanged. Geometry for traces and all widget appearance
   are supplied by the independently declared presentation configuration.
+
+The [arithmetic audit](../governance/profile-arithmetic.md) derives the equivalence of B04 to a
+signed-delta nearest-integer blend over an opaque background and records an exhaustive byte-domain
+comparison. This does not claim equivalence for a second, non-full coverage factor.
 
 ## MEDUI-PROFILE-PRESENTATION, version 1
 
@@ -224,7 +237,8 @@ makes each appearance choice explicit; equality is claimed only for the same con
 complete, unique variant resolution are additional semantic checks; schema validity alone does
 not establish them.
 
-- **P01 — configuration.** The declaration identifies theme/font/asset digests, backend, surface,
+- **P01 — configuration.** The declaration identifies theme/font digests, an asset array using
+  E01's ID/digest and ordering rules, backend, surface,
   and a finite set of variants for every component in `spec/component-model.md`. Each variant
   names component, pressed/focused state, face and label rectangles relative to the node (or
   `null` when absent), RGBA8 tint (or `null`), caret rectangle (or `null`), and explicit clipping.
@@ -235,9 +249,20 @@ not establish them.
   variant, translated by node origin for rectangles, and clipped to node/surface when clipping
   is true. All component kinds, including Row, have observation vectors. State-dependent button
   face and TextInput caret are independently observable.
+
+## MEDUI-PROFILE-PIXELS, version 1
+
+P03 is opt-in per captured product corpus, independent of P01/P02 presentation observations.
+A PIXELS support claim requires all synthetic P03 vectors; it does not require publishing or
+committing any product capture baseline. Product captures may stay uncommitted and specific to
+a declared driver/configuration tuple. Products choose explicitly which captured corpora, if any,
+use exact comparison. The presentation declaration and capture identities remain required for
+each such comparison.
+
 - **P03 — pixel evidence.** An exact-pixel comparison requires identical presentation declaration
   digest, theme/font/assets, backend, surface, locale, scenario and frame. Any mismatch fails
-  identity before pixel comparison, even if byte arrays happen to match. Once identities agree,
+  identity before pixel comparison, even if byte arrays happen to match. Assets use E01's ordered
+  array representation. Once identities agree,
   bytes compare exactly. Product-specific captured corpora must carry these declarations;
   synthetic geometry and colour vectors assert no cross-backend pixel parity.
 

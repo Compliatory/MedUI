@@ -5,7 +5,12 @@
   "document": {
     "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-    "assets": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "assets": [
+      {
+        "id": "image/ui",
+        "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    ],
     "backend": "synthetic",
     "surface": [
       20,

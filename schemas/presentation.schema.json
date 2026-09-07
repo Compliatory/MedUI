@@ -21,8 +21,27 @@
       "pattern": "^[0-9a-f]{64}$"
     },
     "assets": {
-      "type": "string",
-      "pattern": "^[0-9a-f]{64}$"
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Unique logical artifact IDs in strictly ascending ASCII order; ordering and ID uniqueness are semantic identity constraints.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "digest"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9./_-]*$"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
     },
     "backend": {
       "type": "string",

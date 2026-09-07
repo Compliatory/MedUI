@@ -30,7 +30,8 @@
             "MEDUI-PROFILE-EVIDENCE",
             "MEDUI-PROFILE-INTERACTION",
             "MEDUI-PROFILE-BINDING",
-            "MEDUI-PROFILE-PRESENTATION"
+            "MEDUI-PROFILE-PRESENTATION",
+            "MEDUI-PROFILE-PIXELS"
           ]
         },
         "version": {

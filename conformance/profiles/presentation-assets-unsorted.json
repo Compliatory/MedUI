@@ -1,5 +1,5 @@
 {
-  "id": "MEDUI-PROFILE-CASE-PRESENTATION-ROW",
+  "id": "MEDUI-PROFILE-CASE-PRESENTATION-ASSETS-UNSORTED",
   "profile": {
     "id": "MEDUI-PROFILE-PRESENTATION",
     "version": 1
@@ -8,7 +8,7 @@
     "P01",
     "P02"
   ],
-  "description": "presentation row",
+  "description": "Presentation asset identities follow E01 ordering and uniqueness.",
   "inputs": {
     "operation": "present",
     "configuration": {
@@ -16,8 +16,12 @@
       "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
       "assets": [
         {
-          "id": "image/ui",
-          "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          "id": "image/z",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "image/a",
+          "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
         }
       ],
       "backend": "synthetic",
@@ -341,21 +345,6 @@
     }
   },
   "expected": {
-    "valid": true,
-    "face": [
-      3,
-      4,
-      10,
-      10
-    ],
-    "label": null,
-    "tint": [
-      255,
-      0,
-      0,
-      255
-    ],
-    "caret": null,
-    "clip": true
+    "valid": false
   }
 }
