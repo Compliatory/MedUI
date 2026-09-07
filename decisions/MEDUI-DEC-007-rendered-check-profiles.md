@@ -1,11 +1,15 @@
 # MEDUI-DEC-007: Rendered-check profiles and evidence identity
 
-Status: Proposed
+Status: Accepted
+
+Accepted on 2026-09-07 by Ambroise Leclerc, maintainer, by explicit instruction.
+Acceptance records the architectural direction below. Profile identifiers, schemas and the
+candidate conformance corpus remain delivery work; no consumer support is asserted.
 
 Raised by [MedUI #15](https://github.com/Compliatory/MedUI/issues/15) from a comparison of the
-MduX and TrustSC verifiers. This record states a direction and the questions a maintainer must
-settle; it does not change an accepted contract, and it allocates no new `MEDUI-` identifiers —
-profile names, check IDs, diagnostic codes — until it is Accepted.
+MduX and TrustSC verifiers. This record accepts the direction and identifies delivery decisions still to
+settle. It allocates no new profile names, check IDs or diagnostic codes; these require
+separate schema and corpus changes before consumer adoption.
 
 ## Problem
 
@@ -33,7 +37,7 @@ each repository.
 4. The required obligation set is derived independently of the report, so a producer that skips
    a check cannot pass by silence.
 
-## Open questions for the maintainer
+## Delivery decisions remaining
 
 - Are these profiles part of MedUI, or a sibling contract that MedUI only references?
 - Which profiles ship first, and does either current consumer's behaviour become one of them
@@ -43,7 +47,7 @@ each repository.
 
 ## Rollout
 
-`MEDUI-DEC-004` and `MEDUI-DEC-005` remain authoritative until this record is Accepted. Adoption
-would be a minor release with its own candidate corpus, passed by every implementation claiming
+`MEDUI-DEC-004` and `MEDUI-DEC-005` remain authoritative for existing compiler and golden-selection
+claims. Profile adoption requires a minor release with its own candidate corpus, passed by every implementation claiming
 the affected capability before any consumer advertises a profile. Language-diagnostic ambiguities
 stay with MedUI #2, #3, #4 and #8, not this record.

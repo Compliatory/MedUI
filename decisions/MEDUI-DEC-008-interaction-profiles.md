@@ -1,11 +1,15 @@
 # MEDUI-DEC-008: Optional interaction, data-binding and presentation profiles
 
-Status: Proposed
+Status: Accepted
+
+Accepted on 2026-09-07 by Ambroise Leclerc, maintainer, by explicit instruction.
+Acceptance records the architectural direction below. Profile identifiers, schemas and the
+candidate conformance corpus remain delivery work; no consumer support is asserted.
 
 Raised by [MedUI #16](https://github.com/Compliatory/MedUI/issues/16) from a comparison of the
 MduX and TrustSC runtimes for [MduX #312](https://github.com/ambroise-leclerc/MduX/issues/312).
-This record states a direction and open questions; it does not change an accepted contract, and
-the behaviours below are proposals for review, not shared requirements.
+This record accepts the architectural direction and behavioral defaults below. Detailed
+profile definitions and their conformance cases remain prerequisites for consumer claims.
 
 ## Problem
 
@@ -20,7 +24,7 @@ this, so "the same screen" behaves differently under interaction.
 
 Define an **optional, versioned logical interaction profile**, with presentation profiles
 declared separately. A consumer that does not claim the profile keeps today's contract unchanged.
-Proposed content, all open for review:
+Accepted direction for the profile definitions:
 
 1. **Coordinates and hit testing.** Normalize platform coordinates once into authored pixels;
    specify clipping, scaling and integer rounding. Hit testing uses half-open rectangles, reverse
@@ -31,7 +35,7 @@ Proposed content, all open for review:
    state.
 3. **Event batch and update boundary.** One bounded ordered event batch with a host-supplied
    capacity; one normalize-enqueue / consume-in-order / update / bind-one-snapshot / render /
-   capture boundary. Saturation and invalid input have observable outcomes; proposed overflow
+   capture boundary. Saturation and invalid input have observable outcomes; overflow
    policy is drop-newest with a saturating counter and cancellation of any pending activation.
 4. **Editing.** Address Unicode scalar boundaries with a bounded accepted glyph set and length;
    reject invalid encoding, disallowed glyphs and oversize edits with no partial mutation.
@@ -44,7 +48,7 @@ Proposed content, all open for review:
    pixels; an exact-pixel corpus case identifies profile, theme, fonts, assets, surface and
    backend.
 
-## Open questions for the maintainer
+## Delivery decisions remaining
 
 - Does an interaction profile belong in MedUI at all, or does the contract stay layout-only and
   point at a separate runtime contract?
