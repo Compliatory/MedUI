@@ -4,6 +4,6 @@
   "source": "source.medui",
   "expected": {
     "valid": false,
-    "diagnostics": [{ "code": "MEDUI-E051", "line": 7, "column": 9 }]
+    "diagnostics": [{ "code": "MEDUI-E054", "line": 7, "column": 9 }]
   }
 }
