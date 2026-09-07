@@ -4,8 +4,8 @@ Status: Proposed
 
 Raised by [MedUI #15](https://github.com/Compliatory/MedUI/issues/15) from a comparison of the
 MduX and TrustSC verifiers. This record states a direction and the questions a maintainer must
-settle; it does not change an accepted contract, and nothing here is an allocated `MEDUI-`
-identifier until this record is Accepted.
+settle; it does not change an accepted contract, and it allocates no new `MEDUI-` identifiers —
+profile names, check IDs, diagnostic codes — until it is Accepted.
 
 ## Problem
 
@@ -18,8 +18,8 @@ each repository.
 
 ## Direction
 
-1. Keep golden selection in the language contract. Define **rendered-observation profiles**
-   separately, each with an immutable ID and version, so a report names which check it ran.
+1. Keep golden selection in the language contract. Define **rendered-check profiles** separately,
+   each with an immutable ID and version, so a report names which check it ran.
 2. Distinguish the check families explicitly — extent equality, ink containment, tint
    composition, exact hash — rather than one fuzzy "colour check". Each profile fixes its pixel
    format, coordinate space, background and chrome resolution, empty-content policy, sampling
