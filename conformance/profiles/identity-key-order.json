@@ -24,7 +24,12 @@
           "version": 1
         },
         "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-        "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "assets": [
+          {
+            "id": "font/main",
+            "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
         "screen": "screen",
         "node": "node",
         "locale": null,
@@ -54,7 +59,12 @@
           "locale": null,
           "node": "node",
           "screen": "screen",
-          "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "assets": [
+            {
+              "id": "font/main",
+              "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          ],
           "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
           "profile": {
             "id": "MEDUI-PROFILE-RENDERED",

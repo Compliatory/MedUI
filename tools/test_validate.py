@@ -23,9 +23,9 @@ class RepositoryValidationTests(unittest.TestCase):
 
     def rewrite(self, name, change):
         path = self.root / name
-        value = json.loads(path.read_text())
+        value = json.loads(path.read_text(encoding="utf-8"))
         change(value)
-        path.write_text(json.dumps(value))
+        path.write_text(json.dumps(value), encoding="utf-8")
 
     def assert_rejected(self, message):
         result = subprocess.run([sys.executable, str(self.root / "tools/validate.py")],
@@ -57,6 +57,25 @@ class RepositoryValidationTests(unittest.TestCase):
         self.rewrite("profiles/registry.json",
                      lambda registry: registry["profiles"][0]["rules"].append("R99"))
         self.assert_rejected("registry rules differ")
+
+    def test_rendered_identity_names_the_exercised_check(self):
+        for field in ("captureIdentity", "baselineIdentity"):
+            with self.subTest(field=field):
+                self.rewrite("conformance/profiles/hash-match.json", lambda case:
+                             case["inputs"][field]["check"].update(id="extent-equality"))
+                self.assert_rejected("identity check differs from the rendered operation")
+                self.rewrite("conformance/profiles/hash-match.json", lambda case:
+                             case["inputs"][field]["check"].update(id="rgba8-sha256"))
+
+    def test_dangling_reference_has_a_readable_failure(self):
+        self.rewrite("schemas/evidence.schema.json", lambda schema:
+                     schema["properties"]["obligations"]["items"].update({"$ref": "#/$defs/missing"}))
+        self.assert_rejected("unresolved schema reference: #/$defs/missing")
+
+    def test_evidence_check_registry_drift(self):
+        self.rewrite("schemas/evidence.schema.json", lambda schema:
+                     schema["$defs"]["identity"]["properties"]["check"]["properties"]["id"]["enum"].pop())
+        self.assert_rejected("evidence profile/check identities differ")
 
 
 if __name__ == "__main__":

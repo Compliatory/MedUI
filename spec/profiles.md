@@ -17,6 +17,12 @@ public observations or a logical scenario, and `expected` is the required observ
 These are not native artifacts or private object layouts. Each vector lists the numbered rules
 it exercises. Repository validation checks structure and rule coverage; consumer harnesses run
 the vectors. Passing repository validation alone is not profile conformance.
+Every vector applies to a claimed profile, including empty ink and zero-area hash regions.
+Consumers may adapt these synthetic observations to a standalone predicate even when their
+integrated compiler or capture path rejects degenerate geometry upstream. Returning `unsupported`
+instead of a vector's expected outcome does not satisfy the claim. Implementation-local checks,
+including glyph-shape checks, may run alongside the shared checks; they neither replace shared
+cases nor change their outcomes.
 
 ### Vector protocol
 
@@ -38,11 +44,13 @@ or default background exists. Product captures require an identified presentatio
   rectangle expanded by the supplied nonnegative integer margin on each side. Touching its
   outer edge is allowed; extending beyond it fails.
 - **R03 — tint-composition/1.** Samples are opaque RGB8 observations over an explicit RGB8
-  background after either one or two identical tint-over-background composites. A single real
-  coverage `a` in `[0,1]` is shared by all three channels of a sample. The ideal channel after
-  `n` composites is `t + (b-t)*(1-a)^n`. Each observed channel may differ by at most `n/2` UNORM
-  units (inclusive), accounting for round-to-nearest error at each composite. Coverage can
-  differ between samples. Every sample must satisfy the common-coverage constraint and at least
+  background after either one or two same-tint composites. A single real effective coverage `a`
+  in `[0,1]` is shared by all three channels of a sample: the ideal channel is `b + (t-b)*a`.
+  Each observed channel may differ by at most `n` UNORM units (inclusive), one per composite.
+  This bounds observed compositing precision, not just ideal round-to-nearest arithmetic. The
+  channels' feasible coverage intervals must have a common intersection with `[0,1]`; a channel
+  with zero tint/background span must differ from that constant by at most `n`.
+  Coverage can differ between samples. Every sample must satisfy this constraint and at least
   one sample must exactly equal the tint. Empty samples, absent tint, or an impossible blend
   fail. This is a conservative bounded envelope, not permission for arbitrary per-channel
   fuzzy matching. Chrome must be resolved into the supplied background before sampling; a
@@ -58,14 +66,27 @@ These check names are immutable only in combination with this profile ID/version
 one or more identified checks, runs old and candidate obligations together, retains both reports,
 and rebakes changed baselines explicitly. No check may be weakened by silently relabelling it.
 
+The R03 candidate allowance was amended from `n/2` to `n` after the recorded narrow-span
+regression in [MduX's GoldenCheckTests at a3f8b6d](https://github.com/ambroise-leclerc/MduX/blob/a3f8b6daae073472b9a6f6b472ee9818b3faedf8/tests/verify/GoldenCheckTests.cpp).
+The shared corpus pins `(215,134,135)` over `(209,214,219)` toward `(219,51,46)`: one composite
+fails, two pass, and a foreign green channel still fails. Effective coverage also avoids imposing
+equal coverage at each composite. For equal coverage, `1-(1-a)^n` spans the same `[0,1]` interval;
+the substantive change is the precision allowance. These are candidate changes, not a
+reinterpretation of a released profile.
+
 ## MEDUI-PROFILE-EVIDENCE, version 1
 
 - **E01 — identity.** Every obligation and report row carries the full identity defined in
   `schemas/evidence.schema.json`: contract SHA; producer name/version/source SHA; profile ID/version;
-  screen artifact and asset SHA-256 digests; screen/node; locale (explicit string or `null` for
+  screen artifact SHA-256 and an ordered asset array; screen/node; locale (explicit string or `null` for
   locale-free); scenario SHA-256 or `static`; capture/frame; check ID/version; backend and rendering
-  configuration digest. Backend/configuration are explicit strings even for synthetic observations
-  (`synthetic` and the digest of the synthetic configuration). Identity comparison is fieldwise,
+  configuration token. `assets` is an array of `{id,digest}` entries: IDs match
+  `[a-z0-9][a-z0-9./_-]*`, are unique and strictly ascending in ASCII byte order, and each digest
+  is the lowercase SHA-256 of that artifact's bytes. IDs identify the role and logical resource,
+  for example `font/main`, `image/ui`, `shader/ui`, `text/fr-fr`. The producer's artifact declaration
+  fixes those IDs; an empty array explicitly means no assets. No implicit digest roll-up is used.
+  Malformed identities (including duplicate or unsorted asset IDs) fail aggregation.
+  Backend/configuration are explicit strings even for synthetic observations. Identity comparison is fieldwise,
   independent of object-key order. Different locales, scenarios, frames or configurations never
   satisfy each other's obligations.
 - **E02 — completeness.** The required obligation array is derived from the selected screen,
@@ -78,6 +99,25 @@ and rebakes changed baselines explicitly. No check may be weakened by silently r
   `missing-baseline`. An aggregate passes only when the set is nonempty, exact, and every row
   passes. Otherwise it fails, except for the empty-set/no-rows result above. Each original row outcome
   remains visible; aggregation never converts unsupported or missing evidence into success.
+
+`configuration` is an opaque producer-scoped token with lowercase SHA-256 shape. Its payload and
+encoding belong to the named producer/version/source contract; MedUI defines no cross-producer
+configuration object or canonical hash. That producer must bind the token to all relevant rendering
+settings and reuse it only for the same configuration. Synthetic vectors use explicit placeholder
+tokens; they assert comparison behavior, not configuration hashing. Equal tokens from different
+producers never pair because the full producer identity is also compared.
+
+`backend` is likewise an exact, case-sensitive producer-scoped identifier. `synthetic` identifies
+this corpus's synthetic backend; product adapters declare and reuse their own exact spelling.
+No aliasing or case folding equates `lavapipe`, `llvmpipe`, or `Mesa lavapipe`. A producer changing
+its backend naming or driver configuration must preserve old evidence identities during migration.
+Cross-consumer conformance compares operation outcomes, not producer-scoped evidence rows.
+
+The evidence envelope is a parsed comparison input. Whitespace, object-key ordering and serialized
+report bytes are not conformance outputs; MedUI prescribes no canonical report serialization.
+Consumers may retain their own canonical committed reports and emit this envelope as a derived
+artifact. The schema's rendered profile/check IDs and versions track the candidate registry and
+R01–R04; adding a released version requires updating the schema identity under the minor policy.
 
 ## Adoption
 

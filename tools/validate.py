@@ -214,6 +214,15 @@ def main() -> None:
         declared[key] = set(profile["rules"])
     if set().union(*declared.values()) != documented_rules:
         fail("profile registry rules differ from spec/profiles.md")
+    evidence_identity = schemas["evidence"]["$defs"]["identity"]["properties"]
+    evidence_profile = evidence_identity["profile"]["properties"]
+    evidence_key = (evidence_profile["id"]["const"], evidence_profile["version"]["const"])
+    evidence_check = evidence_identity["check"]["properties"]
+    documented_checks = set(re.findall(r"\*\*R[0-9]{2} — ([a-z0-9-]+)/([0-9]+)\.", profile_text))
+    schema_checks = {(check, str(evidence_check["version"]["const"]))
+                     for check in evidence_check["id"]["enum"]}
+    if evidence_key not in declared or schema_checks != documented_checks:
+        fail("evidence profile/check identities differ from the registry or specification")
     claim_schema = properties["profiles"]["items"]
     schema_claims = {
         (identifier, claim_schema["properties"]["version"]["const"])
@@ -238,6 +247,13 @@ def main() -> None:
             if key not in declared or not set(case["rules"]) <= declared[key]:
                 fail(f"{case['id']} references unknown profile rules")
             coverage[key].update(case["rules"])
+            inputs = case["inputs"]
+            if inputs["operation"] == "rendered-check":
+                for field in ("captureIdentity", "baselineIdentity"):
+                    if field in inputs and inputs[field].get("check") != {
+                        "id": inputs.get("check"), "version": key[1]
+                    }:
+                        fail(f"{case['id']} {field}: identity check differs from the rendered operation")
         else:
             problems = validate(case["document"], schemas[case["schema"]])
             if (not problems) != case["valid"]:
@@ -253,4 +269,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except ValueError as error:
+        fail(str(error))

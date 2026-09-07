@@ -16,7 +16,12 @@
           "version": 1
         },
         "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-        "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "assets": [
+          {
+            "id": "font/main",
+            "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
         "screen": "screen",
         "node": "node",
         "locale": null,
@@ -44,7 +49,12 @@
             "id": "MEDUI-PROFILE-RENDERED",
             "version": 1
           },
-          "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "assets": [
+            {
+              "id": "font/main",
+              "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          ],
           "screen": "screen",
           "node": "node",
           "locale": null,

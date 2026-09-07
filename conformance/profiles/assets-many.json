@@ -1,0 +1,111 @@
+{
+  "id": "MEDUI-PROFILE-CASE-ASSETS-MANY",
+  "profile": {
+    "id": "MEDUI-PROFILE-EVIDENCE",
+    "version": 1
+  },
+  "rules": [
+    "E01",
+    "E02"
+  ],
+  "description": "Validate the full identity asset list before comparing obligations and rows.",
+  "inputs": {
+    "operation": "aggregate-evidence",
+    "obligations": [
+      {
+        "contract": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "producer": {
+          "name": "fixture",
+          "version": "1",
+          "source": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "profile": {
+          "id": "MEDUI-PROFILE-RENDERED",
+          "version": 1
+        },
+        "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "assets": [
+          {
+            "id": "font/main",
+            "digest": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "id": "image/ui",
+            "digest": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          {
+            "id": "shader/ui",
+            "digest": "3333333333333333333333333333333333333333333333333333333333333333"
+          },
+          {
+            "id": "text/fr-fr",
+            "digest": "4444444444444444444444444444444444444444444444444444444444444444"
+          }
+        ],
+        "screen": "screen",
+        "node": "node",
+        "locale": null,
+        "scenario": "static",
+        "capture": "capture",
+        "frame": 0,
+        "check": {
+          "id": "extent-equality",
+          "version": 1
+        },
+        "backend": "synthetic",
+        "configuration": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      }
+    ],
+    "rows": [
+      {
+        "identity": {
+          "contract": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "producer": {
+            "name": "fixture",
+            "version": "1",
+            "source": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "profile": {
+            "id": "MEDUI-PROFILE-RENDERED",
+            "version": 1
+          },
+          "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "assets": [
+            {
+              "id": "font/main",
+              "digest": "1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            {
+              "id": "image/ui",
+              "digest": "2222222222222222222222222222222222222222222222222222222222222222"
+            },
+            {
+              "id": "shader/ui",
+              "digest": "3333333333333333333333333333333333333333333333333333333333333333"
+            },
+            {
+              "id": "text/fr-fr",
+              "digest": "4444444444444444444444444444444444444444444444444444444444444444"
+            }
+          ],
+          "screen": "screen",
+          "node": "node",
+          "locale": null,
+          "scenario": "static",
+          "capture": "capture",
+          "frame": 0,
+          "check": {
+            "id": "extent-equality",
+            "version": 1
+          },
+          "backend": "synthetic",
+          "configuration": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "outcome": "pass"
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}

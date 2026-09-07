@@ -16,7 +16,12 @@
           "version": 1
         },
         "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-        "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "assets": [
+          {
+            "id": "font/main",
+            "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
         "screen": "screen",
         "node": "node",
         "locale": null,
@@ -45,7 +50,12 @@
             "version": 1
           },
           "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "assets": [
+            {
+              "id": "font/main",
+              "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            }
+          ],
           "screen": "screen",
           "locale": null,
           "scenario": "static",

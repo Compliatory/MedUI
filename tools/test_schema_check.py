@@ -59,6 +59,22 @@ class SchemaCheckTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "only local"):
             validate({}, {"$ref": "https://example.invalid/schema"})
 
+    def test_unanchored_patterns_use_json_schema_search_semantics(self):
+        self.assertFalse(validate("apple", {"pattern": "p"}))
+        self.assertTrue(validate("apple", {"pattern": "^p$"}))
+
+    def test_dangling_references_are_reported_even_in_unused_properties(self):
+        schema = {"properties": {"unused": {"$ref": "#/$defs/missing"}}}
+        with self.assertRaisesRegex(ValueError, "unresolved schema reference"):
+            validate({}, schema)
+        with self.assertRaisesRegex(ValueError, "does not target a schema object"):
+            validate({}, {"title": "not a schema", "$ref": "#/title"})
+
+    def test_escaped_reference_tokens(self):
+        schema = {"$defs": {"a/b~c": {"type": "integer"}}, "$ref": "#/$defs/a~1b~0c"}
+        self.assertFalse(validate(1, schema))
+        self.assertTrue(validate("1", schema))
+
 
 if __name__ == "__main__":
     unittest.main()

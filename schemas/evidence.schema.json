@@ -110,8 +110,27 @@
           "pattern": "^[0-9a-f]{64}$"
         },
         "assets": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
+          "type": "array",
+          "uniqueItems": true,
+          "description": "Unique logical artifact IDs in strictly ascending ASCII order; ordering and ID uniqueness are semantic identity constraints.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "digest"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9./_-]*$"
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
         },
         "screen": {
           "type": "string",
@@ -174,11 +193,13 @@
         },
         "backend": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Exact case-sensitive producer-scoped backend identifier. No alias canonicalization is applied."
         },
         "configuration": {
           "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "Opaque producer-scoped token; payload and encoding are defined by the producer contract, not by MedUI."
         }
       }
     }

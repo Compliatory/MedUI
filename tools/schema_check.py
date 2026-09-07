@@ -14,19 +14,37 @@ KEYWORDS = {
 }
 
 
-def check_schema(schema):
+def resolve_reference(root, ref):
+    if not isinstance(ref, str) or not ref.startswith("#/"):
+        raise ValueError(f"only local schema references are supported: {ref}")
+    target = root
+    try:
+        for part in ref[2:].split("/"):
+            key = part.replace("~1", "/").replace("~0", "~")
+            target = target[int(key)] if isinstance(target, list) else target[key]
+    except (KeyError, IndexError, TypeError, ValueError) as error:
+        raise ValueError(f"unresolved schema reference: {ref}") from error
+    if not isinstance(target, dict):
+        raise ValueError(f"schema reference does not target a schema object: {ref}")
+    return target
+
+
+def check_schema(schema, root=None):
+    root = schema if root is None else root
     if not isinstance(schema, dict):
         raise ValueError("schemas must be objects")
     unknown = set(schema) - KEYWORDS
     if unknown:
         raise ValueError(f"unsupported schema keywords: {sorted(unknown)}")
+    if "$ref" in schema:
+        resolve_reference(root, schema["$ref"])
     for key in ("properties", "$defs"):
         for child in schema.get(key, {}).values():
-            check_schema(child)
+            check_schema(child, root)
     if "items" in schema:
-        check_schema(schema["items"])
+        check_schema(schema["items"], root)
     for child in schema.get("anyOf", []):
-        check_schema(child)
+        check_schema(child, root)
 
 
 def equal(left, right):
@@ -44,12 +62,7 @@ def errors(value, schema, root=None, path="$"):
     root = schema if root is None else root
     result = []
     if "$ref" in schema:
-        ref = schema["$ref"]
-        if not ref.startswith("#/"):
-            raise ValueError(f"only local schema references are supported: {ref}")
-        target = root
-        for part in ref[2:].split("/"):
-            target = target[part.replace("~1", "/").replace("~0", "~")]
+        target = resolve_reference(root, schema["$ref"])
         result.extend(errors(value, target, root, path))
     if "anyOf" in schema and not any(
         not errors(value, child, root, path) for child in schema["anyOf"]
@@ -96,6 +109,7 @@ def errors(value, schema, root=None, path="$"):
     if isinstance(value, str):
         if len(value) < schema.get("minLength", 0):
             result.append(f"{path}: string too short")
+        # JSON Schema patterns match anywhere; schemas use anchors when the whole string matters.
         if "pattern" in schema and not re.search(schema["pattern"], value):
             result.append(f"{path}: pattern mismatch")
     if isinstance(value, (int, float)) and not isinstance(value, bool):

@@ -52,7 +52,12 @@
         "version": 1
       },
       "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-      "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "assets": [
+        {
+          "id": "font/main",
+          "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
       "screen": "screen",
       "node": "node",
       "locale": null,
@@ -60,7 +65,7 @@
       "capture": "capture",
       "frame": 0,
       "check": {
-        "id": "extent-equality",
+        "id": "rgba8-sha256",
         "version": 1
       },
       "backend": "synthetic",
@@ -78,7 +83,12 @@
         "version": 1
       },
       "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-      "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "assets": [
+        {
+          "id": "font/main",
+          "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
       "screen": "screen",
       "node": "node",
       "locale": null,
@@ -86,7 +96,7 @@
       "capture": "capture",
       "frame": 0,
       "check": {
-        "id": "extent-equality",
+        "id": "rgba8-sha256",
         "version": 1
       },
       "backend": "other",
