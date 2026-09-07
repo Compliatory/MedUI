@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Compliatory/MedUI/raw/main/schemas/diagnostic.schema.json",
+  "$id": "https://github.com/Compliatory/MedUI/schemas/0.2/diagnostic.schema.json",
   "title": "MedUI diagnostic envelope",
   "type": "object",
   "additionalProperties": false,
