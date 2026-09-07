@@ -7,6 +7,16 @@ already-defined outcome. Tags are immutable. Consumers pin the exact 40-characte
 A contract change is accepted only after every implementation claiming the affected capability
 passes the candidate commit. Capabilities are `syntax`, `semantics`, `layout`, and `safety`.
 
+## Schema identity
+
+Every file in `schemas/` carries an `$id` ending `/schemas/<MAJOR.MINOR>/<name>.schema.json`. The
+`$id` is an identity, not a fetch target: it names the contract revision a schema belongs to, so
+two consumers that resolve "the case schema" through a pinned commit are resolving the same
+document. The `<MAJOR.MINOR>` segment tracks the `VERSION` file's major and minor. A schema change
+that alters what validates is at least a minor release and moves the segment with it; a patch
+release leaves every `$id` untouched. Consumers still pin the commit SHA, which is what makes any
+`$id` reproducible.
+
 ## The consumer manifest
 
 A consumer records what it pins and what it claims in a `medui-conformance.toml` at its repository

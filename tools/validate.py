@@ -66,6 +66,15 @@ def main() -> None:
     if decision_numbers != list(range(1, len(decision_numbers) + 1)):
         fail(f"decision identifiers are not contiguous from 001: {decision_numbers}")
 
+    # Every schema's $id names the contract minor it belongs to (governance/versioning.md).
+    minor = ".".join(version.split(".")[:2])
+    for schema_path in sorted((ROOT / "schemas").glob("*.schema.json")):
+        schema_id = load_json(schema_path).get("$id")
+        if not isinstance(schema_id, str):
+            fail(f"{schema_path.name} has no string $id")
+        if not schema_id.endswith(f"/schemas/{minor}/{schema_path.name}"):
+            fail(f"{schema_path.name} $id does not carry the {minor} contract minor: {schema_id}")
+
     registry_text = (ROOT / "spec/diagnostics.md").read_text(encoding="utf-8")
     code_phase = {code: phase for code, phase in REGISTRY_ROW.findall(registry_text)}
     code_list = re.findall(r"^\|\s*`(MEDUI-E[0-9]{3})`\s*\|", registry_text, flags=re.MULTILINE)

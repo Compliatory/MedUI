@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Compliatory/MedUI/raw/main/schemas/consumer-manifest.schema.json",
+  "$id": "https://github.com/Compliatory/MedUI/schemas/0.2/consumer-manifest.schema.json",
   "title": "MedUI consumer manifest",
   "description": "The parsed structure of a consumer's medui-conformance.toml. The file on disk is TOML; this describes what a harness sees after parsing it.",
   "type": "object",
