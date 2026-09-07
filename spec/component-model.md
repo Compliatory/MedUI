@@ -64,7 +64,7 @@ discover it.
 
 ## Resource identifiers
 
-`img("ID")` names a baked image and `template:` names a baked display template. Neither is a member
+`img("ID")` names a baked image and `template` names a baked display template. Neither is a member
 of a closed set — the identifiers a screen may use are whichever ones the product baked — so an
 identifier that does not resolve reports `MEDUI-E035` (unknown resource identifier), with the kind
 named in the message. A semantic case declares the resolvable identifiers with the `imageIds` and
