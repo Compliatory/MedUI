@@ -7,3 +7,4 @@
 - [MEDUI-DEC-005](MEDUI-DEC-005-diagnostics-and-conformance.md)
 - [MEDUI-DEC-006](MEDUI-DEC-006-closed-named-values.md)
 - [MEDUI-DEC-007](MEDUI-DEC-007-rendered-check-profiles.md)
+- [MEDUI-DEC-008](MEDUI-DEC-008-interaction-profiles.md)
