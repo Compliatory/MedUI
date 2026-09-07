@@ -14,7 +14,10 @@ CAPABILITIES = ["syntax", "semantics", "layout", "safety"]
 PRECISIONS = ["full", "line-only", "none"]
 CASE_ID = re.compile(r"MEDUI-CASE-[A-Z0-9-]+\Z")
 CODE = re.compile(r"MEDUI-E[0-9]{3}\Z")
-SEMVER = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+\Z")
+# VERSION is MAJOR.MINOR.PATCH only. Release-candidate and "-candidate" labels live in git tags and
+# the consumer manifest's `version` field, never in this file, so a pre-release suffix here is an
+# error rather than an accepted shape.
+VERSION_SHAPE = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+\Z")
 REGISTRY_ROW = re.compile(r"\|\s*`(MEDUI-E[0-9]{3})`\s*\|\s*([a-z]+)\s*\|")
 
 # Diagnostics registered as of the 0.1 baseline. MEDUI-DEC-005 fixes a code's meaning and forbids
@@ -39,10 +42,21 @@ def note(message: str) -> None:
     print(f"MedUI validation: note: {message}")
 
 
+def load_json(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        fail(f"{path.relative_to(ROOT)} is not valid JSON: {error}")
+
+
+def is_int(value: object) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
 def main() -> None:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    if not SEMVER.fullmatch(version):
-        fail(f"VERSION is not semantic: {version!r}")
+    if not VERSION_SHAPE.fullmatch(version):
+        fail(f"VERSION must be MAJOR.MINOR.PATCH, got {version!r}")
 
     # Decision identifiers are contiguous from 001. The count is free to grow; a gap or a
     # renumber is not (MEDUI-DEC identities are permanent).
@@ -67,7 +81,7 @@ def main() -> None:
     # The consumer-manifest schema and governance/versioning.md state the same constraints; a
     # harness reads one and a maintainer reads the other, so they are checked against each other
     # rather than trusted to stay in step.
-    manifest_schema = json.loads((ROOT / "schemas/consumer-manifest.schema.json").read_text())
+    manifest_schema = load_json(ROOT / "schemas/consumer-manifest.schema.json")
     if set(manifest_schema["required"]) != {"repository", "commit", "capabilities", "positions"}:
         fail(f"consumer manifest required keys changed: {manifest_schema['required']}")
     if manifest_schema["additionalProperties"] is not False:
@@ -80,7 +94,7 @@ def main() -> None:
 
     # The case schema is the source of truth for member names; the checks below read it rather
     # than restating it, so a schema edit does not silently diverge from the validator.
-    case_schema = json.loads((ROOT / "schemas/case.schema.json").read_text())
+    case_schema = load_json(ROOT / "schemas/case.schema.json")
     case_required = set(case_schema["required"])
     case_top_level = set(case_schema["properties"])
     if case_schema["additionalProperties"] is not False:
@@ -89,7 +103,7 @@ def main() -> None:
     expected_keys = set(case_schema["properties"]["expected"]["properties"])
     expected_required = set(case_schema["properties"]["expected"]["required"])
 
-    aliases = json.loads((ROOT / "compat/mdx-e-aliases-v0.1.json").read_text())["aliases"]
+    aliases = load_json(ROOT / "compat/mdx-e-aliases-v0.1.json")["aliases"]
     if not set(aliases.values()) <= known_codes:
         fail("an MDX-E alias points outside the canonical diagnostic registry")
     for old, new in aliases.items():
@@ -102,14 +116,19 @@ def main() -> None:
     if not cases:
         fail("no conformance cases found")
     for path in cases:
-        case = json.loads(path.read_text(encoding="utf-8"))
+        rel = path.relative_to(ROOT)
+        case = load_json(path)
+        if not isinstance(case, dict):
+            fail(f"{rel} is not a JSON object")
         if not case_required <= case.keys() or set(case) - case_top_level:
-            fail(f"{path.relative_to(ROOT)} has invalid top-level members")
-        if not CASE_ID.fullmatch(case["id"]) or case["id"] in seen:
-            fail(f"invalid or duplicate case id {case['id']}")
+            fail(f"{rel} has invalid top-level members")
+        if not isinstance(case["id"], str) or not CASE_ID.fullmatch(case["id"]) or case["id"] in seen:
+            fail(f"invalid or duplicate case id {case['id']!r} in {rel}")
         seen.add(case["id"])
         if case["phase"] not in PHASES or path.parent.parent.name != case["phase"]:
             fail(f"{case['id']} has an invalid or mismatched phase")
+        if not isinstance(case["source"], str) or "/" in case["source"]:
+            fail(f"{case['id']} has an invalid source member")
         source = path.parent / case["source"]
         if not source.is_file() or source.suffix != ".medui":
             fail(f"{case['id']} source does not resolve")
@@ -140,13 +159,20 @@ def main() -> None:
                 fail(f"{case['id']} has an invalid or duplicate locale/key")
             locales.add(locale)
         expected = case["expected"]
+        if not isinstance(expected, dict):
+            fail(f"{case['id']} expected is not a JSON object")
         if not expected_required <= expected.keys() or set(expected) - expected_keys:
             fail(f"{case['id']} has invalid expected members")
         if not isinstance(expected.get("valid"), bool) or not isinstance(expected.get("diagnostics"), list):
             fail(f"{case['id']} has invalid expected shape")
         for diagnostic in expected["diagnostics"]:
-            if set(diagnostic) != {"code", "line", "column"} or not CODE.fullmatch(diagnostic["code"]):
+            if (not isinstance(diagnostic, dict)
+                    or set(diagnostic) != {"code", "line", "column"}
+                    or not isinstance(diagnostic["code"], str)
+                    or not CODE.fullmatch(diagnostic["code"])):
                 fail(f"{case['id']} has an invalid diagnostic expectation")
+            if not is_int(diagnostic["line"]) or not is_int(diagnostic["column"]):
+                fail(f"{case['id']} has a non-integer diagnostic position")
             if diagnostic["code"] not in known_codes or diagnostic["line"] < 0 or diagnostic["column"] < 0:
                 fail(f"{case['id']} references an invalid diagnostic")
             registered_phase = code_phase.get(diagnostic["code"])
