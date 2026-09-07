@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-SAFETY-UNKNOWN-CV-CHECK",
+  "phase": "safety",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E071", "line": 3, "column": 33 }]
+  }
+}

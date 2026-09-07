@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-SYNTAX-DUPLICATE-NODE-ID",
+  "phase": "syntax",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E014", "line": 11, "column": 13 }]
+  }
+}

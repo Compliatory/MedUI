@@ -1,0 +1,12 @@
+Screen PositionedNodeOverflow {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    surface: 200px, 200px;
+    Label {
+        id: edge;
+        width: 100px;
+        height: 40px;
+        position: 150px, 0px;
+        text: t("STR-EDGE");
+        color: Theme.Colors.Title;
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-SYNTAX-SOURCE-NOT-UTF8",
+  "phase": "syntax",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E004", "line": 1, "column": 8 }]
+  }
+}
