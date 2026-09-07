@@ -16,7 +16,8 @@ checked rather than tolerated, so gaining precision is a manifest change and nev
 A phase claimed at reduced precision is still claimed.
 
 Semantic cases may provide implementation-neutral `inputs`: `themeTokens` is the complete set of
-known colour-token names, and each `textPackages` entry is the complete key view for one approved
-locale. An omitted collection is empty. Tokens, locale names, and keys are non-empty and unique;
-locale order has no semantic meaning. These logical views deliberately do not prescribe an
-implementation's package, file, or runtime representation.
+known colour-token names, `imageIds` and `templates` are the complete sets of baked image and
+display-template identifiers, and each `textPackages` entry is the complete key view for one
+approved locale. An omitted collection is empty. Tokens, identifiers, locale names, and keys are
+non-empty and unique; locale order has no semantic meaning. These logical views deliberately do not
+prescribe an implementation's package, file, or runtime representation.

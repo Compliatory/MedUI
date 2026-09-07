@@ -1,0 +1,9 @@
+Screen UnknownImage {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Image {
+        id: logo;
+        width: 64px;
+        height: 64px;
+        source: img("LOGO-MISSING");
+    }
+}

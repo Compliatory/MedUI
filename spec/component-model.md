@@ -62,11 +62,19 @@ Closing `on_press` is what keeps a critical control honest: a screen that can na
 can name one the host does not implement, and the press of a critical button is the worst place to
 discover it.
 
-`charset` stays open and is **not** covered by `MEDUI-E034`. It names a baked character set rather
-than a member of a fixed vocabulary, so what resolves it is the implementation's own packages rather
-than this contract. An unresolved `charset` fails compilation and has no code assigned; giving it
-one would require the case schema to carry charset-package inputs, so that a case could state which
-sets exist before asserting that one does not.
+## Resource identifiers
+
+`img("ID")` names a baked image and `template` names a baked display template. Neither is a member
+of a closed set — the identifiers a screen may use are whichever ones the product baked — so an
+identifier that does not resolve reports `MEDUI-E035` (unknown resource identifier), with the kind
+named in the message. A semantic case declares the resolvable identifiers with the `imageIds` and
+`templates` `inputs` collections, the same way `themeTokens` declares the known colour tokens.
+
+`charset` also names an implementation resource rather than a member of a fixed vocabulary, but it
+stays **outside** `MEDUI-E035`: an unresolved `charset` fails compilation with no code assigned,
+because a case cannot yet declare which character sets exist. An unknown screen `layout` kind is
+likewise fatal and unassigned; whether it is a closed named value (`Vertical`, `Horizontal`) or a
+grammar production is still open.
 
 Node IDs are unique after synthetic row-background nodes are included. `position` requires fixed
 dimensions and removes the node from flow; a positioned node whose `width` or `height` is `Fill`
@@ -76,8 +84,9 @@ containing box and must not overlap other non-background nodes. Images render at
 dimensions. Text keys must
 exist for every approved locale, and every static or bounded-dynamic text value must fit its box in
 the worst approved case. Unknown theme tokens (`MEDUI-E030`), text keys (`MEDUI-E031`), CV
-checks (`MEDUI-E071`), and members outside a closed set (`MEDUI-E034`) fail compilation. Unknown
-image IDs, templates and charsets also fail compilation and have no code assigned yet.
+checks (`MEDUI-E071`), members outside a closed set (`MEDUI-E034`), and unknown image or template
+identifiers (`MEDUI-E035`) fail compilation. An unknown `charset` or screen `layout` kind is also
+fatal and has no code assigned yet.
 
 Compiled output is a flat, locale-free sequence of nodes with absolute rectangles and a finite
 draw budget. Implementation-specific output fields beyond these shared semantics are permitted.

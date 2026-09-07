@@ -1,0 +1,10 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-IMAGE-ID",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": { "imageIds": ["LOGO-PRIMARY"] },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E035", "line": 7, "column": 17 }]
+  }
+}

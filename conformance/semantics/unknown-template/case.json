@@ -1,0 +1,13 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-UNKNOWN-TEMPLATE",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.Digits"],
+    "templates": ["TPL-SEDATION-INDEX-160"]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E035", "line": 8, "column": 19 }]
+  }
+}

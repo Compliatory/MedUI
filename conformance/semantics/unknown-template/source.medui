@@ -1,0 +1,12 @@
+Screen UnknownTemplate {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    NumericDisplay {
+        id: score;
+        width: 128px;
+        height: 64px;
+        requirement: "REQ-UT-001";
+        template: "TPL-MISSING";
+        source: "SCORE";
+        color: Theme.Colors.Digits;
+    }
+}

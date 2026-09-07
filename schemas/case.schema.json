@@ -18,6 +18,16 @@
           "uniqueItems": true,
           "items": { "type": "string", "minLength": 1 }
         },
+        "imageIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "templates": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
         "textPackages": {
           "type": "array",
           "items": {

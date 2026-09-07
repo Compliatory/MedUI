@@ -45,6 +45,7 @@ fails at every precision.
 | `MEDUI-E032` | semantics | text key missing for an approved locale |
 | `MEDUI-E033` | semantics | field value has the wrong semantic kind |
 | `MEDUI-E034` | semantics | named value outside its closed set |
+| `MEDUI-E035` | semantics | unknown resource identifier |
 | `MEDUI-E050` | layout | text budget exceeded |
 | `MEDUI-E051` | layout | layout overflow |
 | `MEDUI-E052` | layout | surface exceeded |
