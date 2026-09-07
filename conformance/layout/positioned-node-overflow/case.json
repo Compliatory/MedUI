@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-LAYOUT-POSITIONED-NODE-OVERFLOW",
+  "phase": "layout",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E051", "line": 8, "column": 9 }]
+  }
+}

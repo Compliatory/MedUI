@@ -1,0 +1,11 @@
+Screen SurfaceExceeded {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    surface: 100px, 100px;
+    Label {
+        id: banner;
+        width: 200px;
+        height: 24px;
+        text: t("STR-TITLE");
+        color: Theme.Colors.Title;
+    }
+}

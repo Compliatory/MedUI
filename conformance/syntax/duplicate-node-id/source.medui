@@ -1,0 +1,17 @@
+Screen DuplicateNodeId {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: 100px;
+        height: 24px;
+        text: t("STR-TITLE");
+        color: Theme.Colors.Title;
+    }
+    Label {
+        id: title;
+        width: 100px;
+        height: 24px;
+        text: t("STR-SUBTITLE");
+        color: Theme.Colors.Title;
+    }
+}

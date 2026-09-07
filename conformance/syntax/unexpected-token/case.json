@@ -1,0 +1,9 @@
+{
+  "id": "MEDUI-CASE-SYNTAX-UNEXPECTED-TOKEN",
+  "phase": "syntax",
+  "source": "source.medui",
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E010", "line": 5, "column": 22 }]
+  }
+}

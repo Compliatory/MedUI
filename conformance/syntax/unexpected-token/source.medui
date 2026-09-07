@@ -1,0 +1,10 @@
+Screen UnexpectedToken {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    Label {
+        id: title;
+        width: 100px 100px;
+        height: 24px;
+        text: t("STR-TITLE");
+        color: Theme.Colors.Title;
+    }
+}

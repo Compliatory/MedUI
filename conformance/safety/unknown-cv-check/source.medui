@@ -1,0 +1,13 @@
+Screen UnknownCvCheck {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    @safety_critical(cv_check: [Bogus])
+    Button {
+        id: action;
+        width: 100px;
+        height: 40px;
+        label: t("STR-ACTION");
+        color: Theme.Colors.PrimaryAction;
+        source: "ACTION";
+        requirement: "REQ-UCC-001";
+    }
+}
