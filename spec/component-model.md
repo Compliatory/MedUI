@@ -69,8 +69,11 @@ one would require the case schema to carry charset-package inputs, so that a cas
 sets exist before asserting that one does not.
 
 Node IDs are unique after synthetic row-background nodes are included. `position` requires fixed
-dimensions and removes the node from flow. Positioned nodes must remain in their containing box and
-must not overlap other non-background nodes. Images render at intrinsic dimensions. Text keys must
+dimensions and removes the node from flow; a positioned node whose `width` or `height` is `Fill`
+reports `MEDUI-E054`, which is distinct from layout overflow (`MEDUI-E051`) because nothing has
+overflowed — the node's geometry simply cannot be resolved. Positioned nodes must remain in their
+containing box and must not overlap other non-background nodes. Images render at intrinsic
+dimensions. Text keys must
 exist for every approved locale, and every static or bounded-dynamic text value must fit its box in
 the worst approved case. Unknown theme tokens (`MEDUI-E030`), text keys (`MEDUI-E031`), CV
 checks (`MEDUI-E071`), and members outside a closed set (`MEDUI-E034`) fail compilation. Unknown

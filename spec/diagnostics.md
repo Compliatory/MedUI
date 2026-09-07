@@ -49,5 +49,6 @@ fails at every precision.
 | `MEDUI-E051` | layout | layout overflow |
 | `MEDUI-E052` | layout | surface exceeded |
 | `MEDUI-E053` | semantics | dynamic text escapes its charset |
+| `MEDUI-E054` | layout | positioned node without fixed dimensions |
 | `MEDUI-E070` | safety | safety-critical node has no requirement |
 | `MEDUI-E071` | safety | unknown CV check |
