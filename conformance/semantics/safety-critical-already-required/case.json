@@ -1,0 +1,13 @@
+{
+  "id": "MEDUI-CASE-SEMANTICS-SAFETY-CRITICAL-ALREADY-REQUIRED",
+  "phase": "semantics",
+  "source": "source.medui",
+  "inputs": {
+    "themeTokens": ["Theme.Colors.CriticalAction"],
+    "textPackages": [{ "locale": "en-US", "keys": ["STR-HALT"] }]
+  },
+  "expected": {
+    "valid": false,
+    "diagnostics": [{ "code": "MEDUI-E012", "line": 4, "column": 5 }]
+  }
+}

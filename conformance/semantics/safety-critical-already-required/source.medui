@@ -1,0 +1,12 @@
+Screen SafetyCriticalAlreadyRequired {
+    layout: Vertical { spacing: 0px; padding: 0px; }
+    @safety_critical(cv_check: [Bounds])
+    CriticalButton {
+        id: halt;
+        width: 200px;
+        height: 80px;
+        label: t("STR-HALT");
+        color: Theme.Colors.CriticalAction;
+        on_press: TriggerHalt;
+    }
+}
