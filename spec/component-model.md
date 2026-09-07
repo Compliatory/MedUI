@@ -98,7 +98,7 @@ must carry one once annotated, and its absence reports `MEDUI-E070`.
 `MEDUI-E070` is only ever the promotion failure. A component whose own row already requires
 `requirement` — `CriticalButton`, `NumericDisplay`, `StatusIndicator` — that omits it reports the
 ordinary `MEDUI-E012` (missing required field), annotated or not; the annotation adds no obligation
-it did not already have. So the two codes never both apply to the same node: `E070` is reachable
+it did not already have. So the two codes never both apply to the same node: `MEDUI-E070` is reachable
 only where the schema made `requirement` optional and the annotation made it required.
 
 Compiled output is a flat, locale-free sequence of nodes with absolute rectangles and a finite
