@@ -9,8 +9,8 @@ passes the candidate commit. Capabilities are `syntax`, `semantics`, `layout`, a
 
 ## Current line: 0.2.0 (candidate)
 
-`VERSION` is `0.2.0`. The 0.2.0 line changes conformance outcomes relative to 0.1: it adds
-`MEDUI-E035` and `MEDUI-E054`, repoints the positioned-node-without-fixed-dimensions case from
+`VERSION` is `0.2.0`. The 0.2.0 line changes conformance outcomes relative to `0.1.0`: it adds
+`MEDUI-E035` and `MEDUI-E054`, repoints `conformance/layout/position-requires-fixed/` from
 `MEDUI-E051` to `MEDUI-E054`, and states that `@safety_critical` promotes `requirement`. Under the
 rule above it is a **candidate** until TrustSC and MduX each pass a pinned 0.2.0 commit at the
 precision they declare. Release candidates are tagged `v0.2.0-rc.N`; `v0.2.0` is tagged only once
