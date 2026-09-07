@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-PROFILE-CASE-EVIDENCE-EMPTY",
+  "profile": {
+    "id": "MEDUI-PROFILE-EVIDENCE",
+    "version": 1
+  },
+  "rules": [
+    "E02",
+    "E03"
+  ],
+  "description": "evidence empty",
+  "inputs": {
+    "operation": "aggregate-evidence",
+    "obligations": [],
+    "rows": []
+  },
+  "expected": {
+    "outcome": "not-run"
+  }
+}

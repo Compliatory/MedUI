@@ -5,11 +5,21 @@ or conformance outcomes; a patch release may clarify prose or add cases that do 
 already-defined outcome. Tags are immutable. Consumers pin the exact 40-character commit SHA.
 
 A contract change is accepted only after every implementation claiming the affected capability
-passes the candidate commit. Capabilities are `syntax`, `semantics`, `layout`, and `safety`.
+passes the candidate commit. Compiler capabilities are `syntax`, `semantics`, `layout`, and `safety`. Optional profile
+claims are independently versioned and tested as specified in [profiles](../spec/profiles.md).
 
-## Current line: 0.2.0 (candidate)
+## Current line: 0.3.0 (candidate)
 
-`VERSION` is `0.2.0`. The 0.2.0 line changes conformance outcomes relative to `0.1.0`: it adds
+`VERSION` is `0.3.0`. This candidate extends the accepted manifest shape with optional `profiles`
+and adds observation contracts, evidence schemas and synthetic cases for MEDUI-DEC-007.
+Existing compiler outcomes are unchanged from 0.2.0. Each implementation claiming an affected
+capability/profile must pass the exact candidate SHA before release or advertising support.
+Use `0.3.0-candidate` for an informational pin label and `v0.3.0-rc.N` for candidate tags;
+`v0.3.0` requires consumer proof. A repository validator result is not such proof.
+
+## Previous line: 0.2.0 (candidate)
+
+The 0.2.0 line changes conformance outcomes relative to `0.1.0`: it adds
 `MEDUI-E035` and `MEDUI-E054`, repoints `conformance/layout/position-requires-fixed/` from
 `MEDUI-E051` to `MEDUI-E054`, and states that `@safety_critical` promotes `requirement`. Under the
 rule above it is a **candidate** until TrustSC and MduX each pass a pinned 0.2.0 commit at the
@@ -47,6 +57,7 @@ positions = "full"          # or "line-only", or "none"
 | `commit` | yes | the exact 40-character lowercase hexadecimal commit SHA pinned in that repository. |
 | `capabilities` | yes | a non-empty array drawn from `syntax`, `semantics`, `layout`, `safety`. |
 | `positions` | yes | exactly one of `full`, `line-only`, `none`. |
+| `profiles` | no | a non-empty, duplicate-free array of `{id, version}` claims from `profiles/registry.json`; omission claims no profiles. |
 | `version` | no | a human-readable label for the pinned revision. |
 
 `commit` alone identifies the contract. `version` is informational: it records which release a pin

@@ -1,0 +1,50 @@
+{
+  "id": "MEDUI-PROFILE-CASE-TINT-ONE-ROUND",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R03"
+  ],
+  "description": "tint one round",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "tint-composition",
+    "tint": [
+      200,
+      100,
+      0
+    ],
+    "composites": 1,
+    "samples": [
+      {
+        "background": [
+          0,
+          0,
+          0
+        ],
+        "rgb": [
+          101,
+          50,
+          0
+        ]
+      },
+      {
+        "background": [
+          0,
+          0,
+          0
+        ],
+        "rgb": [
+          200,
+          100,
+          0
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}

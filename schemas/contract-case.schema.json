@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/schemas/0.3/contract-case.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schema",
+    "description",
+    "document",
+    "valid"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^MEDUI-CONTRACT-CASE-[A-Z0-9-]+$"
+    },
+    "schema": {
+      "enum": [
+        "consumer-manifest",
+        "evidence"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "document": {
+      "type": "object"
+    },
+    "valid": {
+      "type": "boolean"
+    }
+  }
+}

@@ -8,6 +8,8 @@ import re
 import sys
 from pathlib import Path
 
+from schema_check import check_schema, validate
+
 ROOT = Path(__file__).resolve().parents[1]
 PHASES = {"syntax", "semantics", "layout", "safety", "support"}
 CAPABILITIES = ["syntax", "semantics", "layout", "safety"]
@@ -68,8 +70,12 @@ def main() -> None:
 
     # Every schema's $id names the contract minor it belongs to (governance/versioning.md).
     minor = ".".join(version.split(".")[:2])
+    schemas = {}
     for schema_path in sorted((ROOT / "schemas").glob("*.schema.json")):
-        schema_id = load_json(schema_path).get("$id")
+        schema = load_json(schema_path)
+        check_schema(schema)
+        schemas[schema_path.name.removesuffix(".schema.json")] = schema
+        schema_id = schema.get("$id")
         if not isinstance(schema_id, str):
             fail(f"{schema_path.name} has no string $id")
         if not schema_id.endswith(f"/schemas/{minor}/{schema_path.name}"):
@@ -196,7 +202,54 @@ def main() -> None:
     if uncovered:
         note(f"{len(uncovered)} registered codes have no conformance case: {', '.join(uncovered)}")
 
-    print(f"MedUI validation: OK ({len(cases)} cases, {len(known_codes)} diagnostics)")
+    # Optional profiles carry observations, never .medui parsers or runtime implementations.
+    registry = load_json(ROOT / "profiles/registry.json")
+    declared = {}
+    profile_text = (ROOT / "spec/profiles.md").read_text(encoding="utf-8")
+    documented_rules = set(re.findall(r"\*\*([REIBP][0-9]{2}) —", profile_text))
+    for profile in registry["profiles"]:
+        key = (profile["id"], profile["version"])
+        if key in declared or not profile["rules"] or len(set(profile["rules"])) != len(profile["rules"]):
+            fail(f"invalid or duplicate profile registration: {key}")
+        declared[key] = set(profile["rules"])
+    if set().union(*declared.values()) != documented_rules:
+        fail("profile registry rules differ from spec/profiles.md")
+    claim_schema = properties["profiles"]["items"]
+    schema_claims = {
+        (identifier, claim_schema["properties"]["version"]["const"])
+        for identifier in claim_schema["properties"]["id"]["enum"]
+    }
+    if schema_claims != declared.keys():
+        fail("manifest profile claims differ from the profile registry")
+    coverage = {key: set() for key in declared}
+    profile_cases = sorted((ROOT / "conformance/profiles").glob("*.json"))
+    contract_cases = sorted((ROOT / "conformance/contracts").glob("*.json"))
+    for path in profile_cases + contract_cases:
+        case = load_json(path)
+        schema_name = "profile-case" if path.parent.name == "profiles" else "contract-case"
+        problems = validate(case, schemas[schema_name])
+        if problems:
+            fail(f"{path.relative_to(ROOT)}: {'; '.join(problems)}")
+        if case["id"] in seen:
+            fail(f"duplicate case ID: {case['id']}")
+        seen.add(case["id"])
+        if schema_name == "profile-case":
+            key = (case["profile"]["id"], case["profile"]["version"])
+            if key not in declared or not set(case["rules"]) <= declared[key]:
+                fail(f"{case['id']} references unknown profile rules")
+            coverage[key].update(case["rules"])
+        else:
+            problems = validate(case["document"], schemas[case["schema"]])
+            if (not problems) != case["valid"]:
+                fail(f"{case['id']} schema outcome differs: {problems}")
+    for key, rules in declared.items():
+        if rules - coverage[key]:
+            fail(f"{key} has uncovered rules: {sorted(rules - coverage[key])}")
+    if not contract_cases:
+        fail("no contract schema cases found")
+
+    print(f"MedUI validation: OK ({len(cases)} compiler cases, {len(profile_cases)} profile cases, "
+          f"{len(contract_cases)} schema cases, {len(known_codes)} diagnostics)")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,99 @@
+{
+  "id": "MEDUI-PROFILE-CASE-HASH-BACKEND",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R04"
+  ],
+  "description": "hash backend",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "rgba8-sha256",
+    "surface": [
+      2,
+      2
+    ],
+    "rgba8": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255,
+      0,
+      0,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255
+    ],
+    "golden": [
+      0,
+      0,
+      2,
+      2
+    ],
+    "baseline": "c21b35e3f28e676cedf24c13575a7346682e101a2d26aad9598d0cdbcee9ee3b",
+    "captureIdentity": {
+      "contract": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "producer": {
+        "name": "fixture",
+        "version": "1",
+        "source": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "profile": {
+        "id": "MEDUI-PROFILE-RENDERED",
+        "version": 1
+      },
+      "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "screen": "screen",
+      "node": "node",
+      "locale": null,
+      "scenario": "static",
+      "capture": "capture",
+      "frame": 0,
+      "check": {
+        "id": "extent-equality",
+        "version": 1
+      },
+      "backend": "synthetic",
+      "configuration": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "baselineIdentity": {
+      "contract": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "producer": {
+        "name": "fixture",
+        "version": "1",
+        "source": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "profile": {
+        "id": "MEDUI-PROFILE-RENDERED",
+        "version": 1
+      },
+      "artifact": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "assets": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "screen": "screen",
+      "node": "node",
+      "locale": null,
+      "scenario": "static",
+      "capture": "capture",
+      "frame": 0,
+      "check": {
+        "id": "extent-equality",
+        "version": 1
+      },
+      "backend": "other",
+      "configuration": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    }
+  },
+  "expected": {
+    "outcome": "fail"
+  }
+}

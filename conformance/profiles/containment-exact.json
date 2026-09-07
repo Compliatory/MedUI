@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CONTAINMENT-EXACT",
+  "profile": {
+    "id": "MEDUI-PROFILE-RENDERED",
+    "version": 1
+  },
+  "rules": [
+    "R02"
+  ],
+  "description": "containment exact",
+  "inputs": {
+    "operation": "rendered-check",
+    "check": "ink-containment",
+    "golden": [
+      2,
+      2,
+      4,
+      4
+    ],
+    "margin": 1,
+    "ink": [
+      2,
+      2,
+      4,
+      4
+    ]
+  },
+  "expected": {
+    "outcome": "pass"
+  }
+}
