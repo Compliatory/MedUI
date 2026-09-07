@@ -36,3 +36,8 @@ vectors. This repository provides no runtime, renderer or native artifact oracle
 validator executes these schema expectations using the dependency-free schema subset checker.
 Schema acceptance and profile execution are distinct: a well-formed evidence report can still
 fail its completeness or identity obligations.
+
+`contracts/presentation-valid.json` contains the canonical synthetic presentation declaration as
+a portable positive schema case. Presentation vectors embed their complete declarations to remain
+self-contained; no separate fixture under `profiles/` or special validator path is needed.
+P01/P02 vectors belong to PRESENTATION; P03 vectors belong to the separately claimed PIXELS profile.

@@ -1,0 +1,25 @@
+{
+  "id": "MEDUI-PROFILE-CASE-STATIC-CRITICALBUTTON",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "static criticalbutton",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "CriticalButton",
+    "declaredSource": "value",
+    "value": null,
+    "entries": []
+  },
+  "expected": {
+    "valid": true
+  }
+}

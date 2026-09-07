@@ -1,0 +1,50 @@
+{
+  "id": "MEDUI-PROFILE-CASE-VIEWPORT-ROUNDING-MAXIMUM-UP",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B04"
+  ],
+  "description": "B04 byte rounding boundary with full additional coverage: maximum-up",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "VulkanViewport",
+    "declaredSource": "value",
+    "value": {
+      "width": 1,
+      "height": 1,
+      "format": "RGBA8",
+      "rgba8": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    "declaredSize": [
+      1,
+      1
+    ],
+    "background": [
+      0,
+      0,
+      0
+    ]
+  },
+  "expected": {
+    "valid": true,
+    "rgba8": [
+      1,
+      1,
+      1,
+      255
+    ]
+  }
+}

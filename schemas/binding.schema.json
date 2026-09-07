@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Compliatory/MedUI/schemas/0.3/binding.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "screen",
+    "snapshot",
+    "frame",
+    "entries"
+  ],
+  "properties": {
+    "screen": {
+      "type": "string",
+      "minLength": 1
+    },
+    "snapshot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "frame": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node",
+              "source",
+              "snapshot",
+              "component",
+              "value"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "snapshot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "component": {
+                "const": "TextInput"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node",
+              "source",
+              "snapshot",
+              "component",
+              "value"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "snapshot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "component": {
+                "const": "Clock"
+              },
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "minItems": 6,
+                "maxItems": 6
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node",
+              "source",
+              "snapshot",
+              "component",
+              "value"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "snapshot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "component": {
+                "const": "StatusIndicator"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node",
+              "source",
+              "snapshot",
+              "component",
+              "value"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "snapshot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "component": {
+                "const": "NumericDisplay"
+              },
+              "value": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "integer",
+                  "scale",
+                  "prefix",
+                  "suffix"
+                ],
+                "properties": {
+                  "integer": {
+                    "type": "string",
+                    "pattern": "^(0|-?[1-9][0-9]*)$"
+                  },
+                  "scale": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "prefix": {
+                    "type": "string"
+                  },
+                  "suffix": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node",
+              "source",
+              "snapshot",
+              "component",
+              "value"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "snapshot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "component": {
+                "const": "SignalTrace"
+              },
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "node",
+              "source",
+              "snapshot",
+              "component",
+              "value"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "snapshot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "component": {
+                "const": "VulkanViewport"
+              },
+              "value": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "width",
+                  "height",
+                  "format",
+                  "rgba8"
+                ],
+                "properties": {
+                  "width": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "height": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "format": {
+                    "const": "RGBA8"
+                  },
+                  "rgba8": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 255
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

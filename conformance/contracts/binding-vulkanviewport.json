@@ -1,0 +1,30 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-VULKANVIEWPORT",
+  "schema": "binding",
+  "description": "binding vulkanviewport",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "VulkanViewport",
+        "value": {
+          "width": 1,
+          "height": 1,
+          "format": "RGBA8",
+          "rgba8": [
+            1,
+            2,
+            3,
+            255
+          ]
+        }
+      }
+    ]
+  },
+  "valid": true
+}

@@ -1,0 +1,33 @@
+{
+  "id": "MEDUI-PROFILE-CASE-STATUS-TYPE",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B02"
+  ],
+  "description": "status type",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "StatusIndicator",
+    "declaredSource": "value",
+    "value": "1",
+    "states": [
+      "first",
+      "second"
+    ],
+    "colors": [
+      "red",
+      "green"
+    ]
+  },
+  "expected": {
+    "valid": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-PRESENTATION-CHANNEL-RANGE",
+  "schema": "presentation",
+  "description": "presentation channel range",
+  "document": {
+    "theme": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "font": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "assets": [
+      {
+        "id": "image/ui",
+        "digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    ],
+    "backend": "synthetic",
+    "surface": [
+      20,
+      20
+    ],
+    "variants": [
+      {
+        "component": "Row",
+        "pressed": false,
+        "focused": false,
+        "face": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "label": null,
+        "tint": [
+          256,
+          0,
+          0,
+          255
+        ],
+        "caret": null,
+        "clip": true
+      }
+    ]
+  },
+  "valid": false
+}

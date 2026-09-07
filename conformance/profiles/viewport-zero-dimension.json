@@ -1,0 +1,39 @@
+{
+  "id": "MEDUI-PROFILE-CASE-VIEWPORT-ZERO-DIMENSION",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B04"
+  ],
+  "description": "viewport zero dimension",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "VulkanViewport",
+    "declaredSource": "value",
+    "value": {
+      "width": 0,
+      "height": 1,
+      "format": "RGBA8",
+      "rgba8": []
+    },
+    "declaredSize": [
+      1,
+      1
+    ],
+    "background": [
+      0,
+      0,
+      100
+    ]
+  },
+  "expected": {
+    "valid": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "MEDUI-PROFILE-CASE-SNAPSHOT-MISSING",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I05"
+  ],
+  "description": "snapshot missing",
+  "inputs": {
+    "operation": "boundary",
+    "surface": [
+      20,
+      20
+    ],
+    "snapshot": null
+  },
+  "expected": {
+    "binding": "fail",
+    "capture": null
+  }
+}

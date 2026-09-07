@@ -1,0 +1,34 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CLOCK-DATETIMESECONDS",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B02"
+  ],
+  "description": "clock datetimeseconds",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "Clock",
+    "declaredSource": "clock",
+    "value": [
+      2024,
+      2,
+      29,
+      1,
+      2,
+      3
+    ],
+    "format": "DateTimeSeconds"
+  },
+  "expected": {
+    "valid": true,
+    "text": "2024-02-29 01:02:03"
+  }
+}

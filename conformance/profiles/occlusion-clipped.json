@@ -1,0 +1,63 @@
+{
+  "id": "MEDUI-PROFILE-CASE-OCCLUSION-CLIPPED",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I02"
+  ],
+  "description": "occlusion clipped",
+  "inputs": {
+    "operation": "hit",
+    "surface": [
+      20,
+      20
+    ],
+    "nodes": [
+      {
+        "id": "button",
+        "component": "Button",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "eligible": true,
+        "source": "confirm"
+      },
+      {
+        "id": "top",
+        "component": "Button",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "eligible": true,
+        "source": "confirm"
+      }
+    ],
+    "point": [
+      2,
+      2
+    ]
+  },
+  "expected": {
+    "target": "button"
+  }
+}

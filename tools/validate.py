@@ -257,7 +257,8 @@ def main() -> None:
         else:
             problems = validate(case["document"], schemas[case["schema"]])
             if (not problems) != case["valid"]:
-                fail(f"{case['id']} schema outcome differs: {problems}")
+                detail = "; ".join(problems) if problems else "document was accepted"
+                fail(f"{case['id']} schema outcome differs: {detail}")
     for key, rules in declared.items():
         if rules - coverage[key]:
             fail(f"{key} has uncovered rules: {sorted(rules - coverage[key])}")

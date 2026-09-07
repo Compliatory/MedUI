@@ -1,6 +1,6 @@
 # Optional observation profiles (0.3.0 candidate)
 
-This is the candidate delivery of MEDUI-DEC-007. Profiles belong to this
+This is the candidate delivery of MEDUI-DEC-007 and MEDUI-DEC-008. Profiles belong to this
 implementation-neutral contract; platform adapters, event loops, rendering algorithms and device
 actions remain in consumer repositories. Compiler capabilities and diagnostics retain their meanings.
 No existing consumer is asserted to support these profiles.
@@ -10,7 +10,9 @@ is immutable once released; changed outcomes require a new version and a contrac
 are optional, independent of compiler phases, and require every case for the claimed profile.
 `profiles` is an optional, nonempty array in the consumer manifest; duplicate claims are rejected.
 An absent array claims nothing. An unknown ID/version or unknown manifest key is rejected.
-Interaction, binding and presentation profile delivery remains separate under MEDUI-DEC-008.
+Presentation and binding claims do not imply interaction or exact-pixel equivalence.
+`MEDUI-PROFILE-PRESENTATION/1` covers P01/P02 only. Exact-pixel support is a separate optional
+`MEDUI-PROFILE-PIXELS/1` claim covering P03; a presentation-only consumer need not claim it.
 
 Each `conformance/profiles/*.json` file is a portable observation vector. `inputs` describes
 public observations or a logical scenario, and `expected` is the required observable result.
@@ -26,9 +28,31 @@ cases nor change their outcomes.
 
 ### Vector protocol
 
-`inputs.operation` selects `rendered-check` or `aggregate-evidence`. Each operates on the supplied
-public data and returns the members asserted in `expected`; omitted expected members impose no
-assertion. Fixture SHA strings identify synthetic inputs; they do not attest to real consumer builds.
+`inputs.operation` selects `rendered-check`, `aggregate-evidence`, `normalize`, `hit`, `events`,
+`edit`, `boundary`, `bind`, `present`, or `pixels`. Each operates on the supplied public data and
+returns the members asserted in `expected`; omitted expected members impose no assertion.
+Malformed scenario inputs return `valid:false` (or the specified operation's failure outcome),
+without partial publication. The following fixture defaults are part of vector interpretation:
+
+- `hit` points are already normalized; only `normalize` takes device coordinates. Omitted origins
+  are zero and omitted scale ratios are 1/1. Omitted clips equal the surface.
+- `events` starts unarmed, unfocused, with an empty queue and a zero dropped counter unless an
+  initial value is supplied. Omitted capacity accepts the whole batch and the counter limit is
+  255. `events` is one batch; `batches` explicitly separates batches and preserves visible state.
+  `remove` and `eligibility` are logical scene changes, not platform event types. An absent
+  `repeat` is false. `focus-next` follows `focusOrder`, beginning at its first node if unfocused.
+- `edit` starts with the explicit text, scalar caret and selection; selection is a half-open
+  `[start,end]` scalar range. A successful edit collapses selection at the resulting caret.
+  Left/right with a nonempty selection collapse to its start/end without an additional move;
+  backspace/delete delete the selected range. Rejected event indices are zero-based.
+- `bind` describes one dynamic node. Unless `entries` is explicit, a non-null `value` is shorthand
+  for exactly one entry with the supplied screen/node/declaredSource/snapshot and that value;
+  `null` supplies no entry. Static components with no entries are valid. Formatting parameters,
+  glyph set/length, trace bounds and viewport dimensions are explicit declaration inputs, not
+  values inferred from a producer's representation. `format` names the authored Clock format.
+- `present` with just a configuration validates the declaration; with a node it additionally
+  resolves and observes the indicated variant. `pixels` compares the entire stated surface.
+  Fixture SHA strings identify synthetic inputs; they do not attest to real consumer builds.
 
 ## MEDUI-PROFILE-RENDERED, version 1
 
@@ -118,6 +142,129 @@ report bytes are not conformance outputs; MedUI prescribes no canonical report s
 Consumers may retain their own canonical committed reports and emit this envelope as a derived
 artifact. The schema's rendered profile/check IDs and versions track the candidate registry and
 R01–R04; adding a released version requires updating the schema identity under the minor policy.
+This envelope is intentionally rendered-only. Interaction, binding, presentation and pixel
+profiles produce their specified operation outputs rather than E01 report rows.
+
+## MEDUI-PROFILE-INTERACTION, version 1
+
+Scenarios supply a surface, a back-to-front ordered list of nodes, eligibility, output mappings,
+host queue capacity, dropped-counter limit, editable values and accepted Unicode scalar sets.
+Rectangles and pointer coordinates use authored pixels. This describes logical observations,
+not a platform input API or device-runtime policy.
+
+- **I01 — coordinates.** Input coordinates and origin are integers; positive integer `scaleNumerator`
+  and `scaleDenominator` give device pixels per authored pixel. Normalize each axis exactly once
+  with `floor((device-origin)*scaleDenominator/scaleNumerator)`, including negative values.
+  Floor means rounding toward negative infinity, not integer truncation toward zero: `-1/2`
+  normalizes to `-1`. Points
+  outside `[0,width) × [0,height)` hit nothing; they are never clamped to an edge control.
+- **I02 — hit.** Search reverse paint order using half-open rectangles intersected with the
+  surface and explicit ancestor clip. The first containing node occludes every node below it,
+  including if it is decorative, disabled or ineligible. Only an eligible Button, CriticalButton
+  or TextInput is a target. A disabled foreground node is not transparent to input.
+- **I03 — activation.** A primary press replaces any prior arm with the hit eligible Button or
+  CriticalButton, or clears it when neither is hit. Release clears the arm and emits an output
+  only if the hit is that same still-eligible node. Repeated presses are ordinary presses; a
+  release without an arm does nothing. Cancel, focus loss, removal, or loss of eligibility clears
+  the arm immediately. Button emits `{kind:"source",node,source}`; CriticalButton emits
+  `{kind:"action",node,action,requirement}` even for `NoOp`. Neither output executes an action.
+- **I04 — queue.** Capacity and dropped-counter limit are positive integers. Enqueue valid events
+  in order until capacity; drop newest on saturation and increment a saturating dropped counter.
+  Any saturation clears the existing arm and suppresses all activation for the entire accepted
+  batch, including a queued press consumed after the overflow. Suppression resets at the next
+  batch boundary; an overflow batch ends unarmed. Invalid events are rejected atomically before
+  queue admission and do not increment the dropped counter. The rejection is observable.
+- **I05 — boundary.** Consume the accepted batch in order, then update application state from
+  emitted outputs, bind exactly one complete snapshot, render, and capture that snapshot's frame.
+  Missing or mixed snapshot identities fail binding and yield no successful capture. Injected
+  time belongs to the same snapshot; no wall-clock read is an input to replay.
+- **I06 — editing.** A primary press focuses an eligible TextInput at its current caret; pressing
+  elsewhere or losing focus clears focus. Focus traversal follows explicit eligible TextInput
+  order, wraps, and clears the arm. Left/right move one Unicode scalar; home/end select the first/
+  last boundary; backspace/delete remove one adjacent scalar if present. Insert and paste replace
+  the selection atomically. All inserted values must be valid Unicode scalar strings in the
+  declared finite glyph set; resulting scalar length must not exceed `maxLength`. Reject invalid
+  UTF-8 (vectors use byte arrays), disallowed glyphs, invalid selection boundaries or oversize
+  replacements without changing text/caret/selection. No normalization or grapheme shaping is
+  implied. Navigation and deletion at an edge do nothing. Repeats apply only to navigation and
+  deletion; repeated insert/paste is rejected. Editing without focus has no effect.
+
+## MEDUI-PROFILE-BINDING, version 1
+
+Each snapshot supplies screen, frame, snapshot ID and an array keyed by node and declared source.
+Bindings are already resolved data, independent of any native storage or callback mechanism.
+`schemas/binding.schema.json` describes the snapshot envelope and typed values; screen is inherited
+by each entry. Declaration-dependent resolution, lengths, dates and ranges are additional semantic
+checks. `bind` vectors isolate a single node and may repeat screen in entries to test mismatches.
+
+- **B01 — mapping.** Each dynamic node has exactly one value matching screen, node, declared
+  source and snapshot ID. Duplicate, missing, unknown or mistyped entries fail the whole snapshot
+  without partial publication. Static Row, Label, Image, Button and CriticalButton need no dynamic
+  values; supplying one is an error. TextInput uses a scalar string bounded as in I06. Clock uses
+  source `clock` and an injected `[year,month,day,hour,minute,second]` Gregorian civil time (years
+  1–9999, seconds 0–59), with no timezone conversion or leap-second inference.
+- **B02 — formatting.** NumericDisplay receives a signed decimal integer string without leading
+  zeros (except `0`), a nonnegative decimal scale, and explicit prefix/suffix. It inserts a decimal
+  point `scale` digits from the right, zero-padding as needed, with ASCII digits, `.` separator,
+  no grouping and no rounding. At `scale = 0`, omit the decimal point entirely; for example,
+  integer `123` renders `123`, not `123.`. Declarations supply positive `maxDigits` (excluding sign) and
+  nonnegative `maxScale`; exceeding either fails. Prefix/suffix are baked template strings, not
+  arbitrary application text. Negative zero is invalid. Clock renders `HH:MM:SS` or
+  `YYYY-MM-DD HH:MM:SS`, zero-padded. StatusIndicator receives a zero-based integer index into
+  authored state order; out-of-range fails. If colours are supplied there is one per state.
+- **B03 — trace.** SignalTrace receives integer samples in chronological order (oldest first),
+  positive capacity, and explicit integer minimum/maximum. Empty input is allowed. Values outside
+  the inclusive range fail; excess samples fail, with no truncation, reordering or clamping.
+- **B04 — viewport.** VulkanViewport receives positive width/height matching its declared pixel
+  surface and exactly `width*height*4` integers in `[0,255]`. Format is straight RGBA8, rows top to
+  bottom and pixels left to right, no padding. Invalid dimensions, lengths, format or channels
+  fail atomically; no inferred resizing, wraparound or clamping. Composition over opaque RGB8
+  background is per channel `floor((src*alpha + bg*(255-alpha) + 127)/255)` with output alpha 255.
+  Alpha is the source pixel's byte alpha; there is no additional glyph-coverage factor. Thus a
+  consumer blend with separate source-alpha and coverage inputs uses full coverage (255).
+  Transparent source leaves background unchanged. Geometry for traces and all widget appearance
+  are supplied by the independently declared presentation configuration.
+
+The [arithmetic audit](../governance/profile-arithmetic.md) derives the equivalence of B04 to a
+signed-delta nearest-integer blend over an opaque background and records an exhaustive byte-domain
+comparison. This does not claim equivalence for a second, non-full coverage factor.
+
+## MEDUI-PROFILE-PRESENTATION, version 1
+
+This is a presentation-description and observation profile, not a universal widget theme. It
+makes each appearance choice explicit; equality is claimed only for the same configuration.
+`schemas/presentation.schema.json` defines the declaration shape. Rectangle extent checks and
+complete, unique variant resolution are additional semantic checks; schema validity alone does
+not establish them.
+
+- **P01 — configuration.** The declaration identifies theme/font digests, an asset array using
+  E01's ID/digest and ordering rules, backend, surface,
+  and a finite set of variants for every component in `spec/component-model.md`. Each variant
+  names component, pressed/focused state, face and label rectangles relative to the node (or
+  `null` when absent), RGBA8 tint (or `null`), caret rectangle (or `null`), and explicit clipping.
+  Every supplied node/state must resolve exactly one variant. Duplicate or missing variants,
+  missing component coverage or missing configuration identity fail. Zero-area rectangles are
+  allowed; negative extents are not. This descriptor does not prescribe rasterization.
+- **P02 — observation.** Resolved face/label/tint/caret/clip observations must equal the selected
+  variant, translated by node origin for rectangles, and clipped to node/surface when clipping
+  is true. All component kinds, including Row, have observation vectors. State-dependent button
+  face and TextInput caret are independently observable.
+
+## MEDUI-PROFILE-PIXELS, version 1
+
+P03 is opt-in per captured product corpus, independent of P01/P02 presentation observations.
+A PIXELS support claim requires all synthetic P03 vectors; it does not require publishing or
+committing any product capture baseline. Product captures may stay uncommitted and specific to
+a declared driver/configuration tuple. Products choose explicitly which captured corpora, if any,
+use exact comparison. The presentation declaration and capture identities remain required for
+each such comparison.
+
+- **P03 — pixel evidence.** An exact-pixel comparison requires identical presentation declaration
+  digest, theme/font/assets, backend, surface, locale, scenario and frame. Any mismatch fails
+  identity before pixel comparison, even if byte arrays happen to match. Assets use E01's ordered
+  array representation. Once identities agree,
+  bytes compare exactly. Product-specific captured corpora must carry these declarations;
+  synthetic geometry and colour vectors assert no cross-backend pixel parity.
 
 ## Adoption
 

@@ -1,0 +1,62 @@
+{
+  "id": "MEDUI-PROFILE-CASE-EDIT-SCALAR",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I06"
+  ],
+  "description": "edit scalar",
+  "inputs": {
+    "operation": "edit",
+    "surface": [
+      20,
+      20
+    ],
+    "nodes": [
+      {
+        "id": "text",
+        "component": "TextInput",
+        "rect": [
+          0,
+          0,
+          10,
+          10
+        ],
+        "clip": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "eligible": true,
+        "source": "name"
+      }
+    ],
+    "focused": "text",
+    "text": "a\ud83d\ude00b",
+    "caret": 2,
+    "selection": [
+      2,
+      2
+    ],
+    "glyphs": [
+      "a",
+      "b",
+      "\u00e9",
+      "\ud83d\ude00"
+    ],
+    "maxLength": 4,
+    "events": [
+      {
+        "type": "backspace"
+      }
+    ]
+  },
+  "expected": {
+    "text": "ab",
+    "caret": 1,
+    "rejectedEvents": []
+  }
+}

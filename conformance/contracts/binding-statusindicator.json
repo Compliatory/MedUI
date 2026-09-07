@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-STATUSINDICATOR",
+  "schema": "binding",
+  "description": "binding statusindicator",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "StatusIndicator",
+        "value": 0
+      }
+    ]
+  },
+  "valid": true
+}

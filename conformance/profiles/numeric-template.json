@@ -1,0 +1,33 @@
+{
+  "id": "MEDUI-PROFILE-CASE-NUMERIC-TEMPLATE",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B02"
+  ],
+  "description": "numeric template",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "NumericDisplay",
+    "declaredSource": "value",
+    "value": {
+      "integer": "123",
+      "scale": 2,
+      "prefix": "dose: ",
+      "suffix": " mg"
+    },
+    "maxDigits": 6,
+    "maxScale": 3
+  },
+  "expected": {
+    "valid": true,
+    "text": "dose: 1.23 mg"
+  }
+}

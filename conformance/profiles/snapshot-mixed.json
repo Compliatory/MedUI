@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-SNAPSHOT-MIXED",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I05"
+  ],
+  "description": "snapshot mixed",
+  "inputs": {
+    "operation": "boundary",
+    "surface": [
+      20,
+      20
+    ],
+    "snapshot": {
+      "id": "s1",
+      "frame": 1,
+      "values": [
+        {
+          "snapshot": "s2"
+        }
+      ]
+    }
+  },
+  "expected": {
+    "binding": "fail",
+    "capture": null
+  }
+}

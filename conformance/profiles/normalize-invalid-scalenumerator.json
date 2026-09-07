@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-NORMALIZE-INVALID-SCALENUMERATOR",
+  "profile": {
+    "id": "MEDUI-PROFILE-INTERACTION",
+    "version": 1
+  },
+  "rules": [
+    "I01"
+  ],
+  "description": "normalize invalid scalenumerator",
+  "inputs": {
+    "operation": "normalize",
+    "surface": [
+      20,
+      20
+    ],
+    "devicePoint": [
+      3,
+      3
+    ],
+    "origin": [
+      0,
+      0
+    ],
+    "scaleNumerator": 0,
+    "scaleDenominator": 1
+  },
+  "expected": {
+    "valid": false
+  }
+}

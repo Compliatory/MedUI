@@ -1,0 +1,25 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-NUMERICDISPLAY",
+  "schema": "binding",
+  "description": "binding numericdisplay",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "NumericDisplay",
+        "value": {
+          "integer": "-1",
+          "scale": 2,
+          "prefix": "",
+          "suffix": ""
+        }
+      }
+    ]
+  },
+  "valid": true
+}

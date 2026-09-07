@@ -1,0 +1,31 @@
+{
+  "id": "MEDUI-PROFILE-CASE-NUMERIC-LEADING-ZERO",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B02"
+  ],
+  "description": "numeric leading zero",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "NumericDisplay",
+    "declaredSource": "value",
+    "value": {
+      "integer": "01",
+      "scale": 2,
+      "prefix": "",
+      "suffix": ""
+    },
+    "maxDigits": 6,
+    "maxScale": 3
+  },
+  "expected": {
+    "valid": false
+  }
+}

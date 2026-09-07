@@ -1,0 +1,25 @@
+{
+  "id": "MEDUI-PROFILE-CASE-STATIC-LABEL",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01"
+  ],
+  "description": "static label",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "Label",
+    "declaredSource": "value",
+    "value": null,
+    "entries": []
+  },
+  "expected": {
+    "valid": true
+  }
+}

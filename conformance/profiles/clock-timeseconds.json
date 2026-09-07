@@ -1,0 +1,34 @@
+{
+  "id": "MEDUI-PROFILE-CASE-CLOCK-TIMESECONDS",
+  "profile": {
+    "id": "MEDUI-PROFILE-BINDING",
+    "version": 1
+  },
+  "rules": [
+    "B01",
+    "B02"
+  ],
+  "description": "clock timeseconds",
+  "inputs": {
+    "operation": "bind",
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 1,
+    "node": "node",
+    "component": "Clock",
+    "declaredSource": "clock",
+    "value": [
+      2024,
+      2,
+      29,
+      1,
+      2,
+      3
+    ],
+    "format": "TimeSeconds"
+  },
+  "expected": {
+    "valid": true,
+    "text": "01:02:03"
+  }
+}

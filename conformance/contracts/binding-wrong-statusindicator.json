@@ -1,0 +1,20 @@
+{
+  "id": "MEDUI-CONTRACT-CASE-BINDING-WRONG-STATUSINDICATOR",
+  "schema": "binding",
+  "description": "binding wrong statusindicator",
+  "document": {
+    "screen": "screen",
+    "snapshot": "s1",
+    "frame": 0,
+    "entries": [
+      {
+        "node": "node",
+        "source": "value",
+        "snapshot": "s1",
+        "component": "StatusIndicator",
+        "value": null
+      }
+    ]
+  },
+  "valid": false
+}
